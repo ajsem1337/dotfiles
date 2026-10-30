@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+import os
+import sys
+import subprocess
+from pathlib import Path
+from datetime import datetime
+
+check = '--check' in sys.argv
+if check:
+    os.environ['GSETTINGS_BACKEND'] = 'memory'
+import gi
+from gi.repository import Gio, GLib
+
+extension = Path.home() / '.local/share/gnome-shell/extensions/blur-my-shell@aunetx'
+source = Gio.SettingsSchemaSource.new_from_directory(str(extension / 'schemas'), Gio.SettingsSchemaSource.get_default(), False)
+base = 'org.gnome.shell.extensions.blur-my-shell'
+def settings(section=''):
+    schema = source.lookup(base + ('.' + section if section else ''), False)
+    return Gio.Settings.new_full(schema, None, None)
+
+profile = {
+    '': {'sigma': 18, 'brightness': 0.78, 'noise-amount': 0.0},
+    'panel': {'blur': True, 'static-blur': True, 'pipeline': 'pipeline_soft_catppuccin', 'unblur-in-overview': False, 'override-background': True, 'style-panel': 2, 'force-light-text': True},
+    'overview': {'blur': True, 'pipeline': 'pipeline_soft_catppuccin', 'style-components': 2},
+    'appfolder': {'blur': True, 'customize': True, 'sigma': 18, 'brightness': 0.78, 'style-dialogs': 3},
+    'applications': {'blur': True, 'enable-all': True, 'static-blur': False, 'customize': True, 'sigma': 18, 'brightness': 0.90, 'opacity': 240, 'dynamic-opacity': False, 'blur-on-overview': False, 'unblur-when-fullscreen': True, 'corner-radius': 12},
+    'popup': {'blur': True, 'static-blur': False, 'sigma': 18, 'brightness': 0.78, 'preserve-shell-theme': True, 'override-background': True, 'style-popup': 2},
+    'coverflow-alt-tab': {'blur': False},
+    'dash-to-dock': {'blur': True, 'static-blur': True, 'pipeline': 'pipeline_soft_catppuccin', 'style-dash-to-dock': 2},
+    'lockscreen': {'blur': True, 'pipeline': 'pipeline_soft_catppuccin'},
+    'screenshot': {'blur': True, 'pipeline': 'pipeline_soft_catppuccin'},
+    'window-list': {'blur': True, 'pipeline': 'pipeline_soft_catppuccin'},
+}
+changes = []
+for section, values in profile.items():
+    obj = settings(section)
+    for key, value in values.items():
+        schema_key = obj.props.settings_schema.get_key(key)
+        variant = GLib.Variant(schema_key.get_value_type().dup_string(), value)
+        if not schema_key.range_check(variant):
+            raise SystemExit('Invalid setting: ' + section + '/' + key)
+        changes.append((obj, key, variant))
+
+root = settings()
+pipelines = root.get_value('pipelines').unpack()
+pipelines['pipeline_soft_catppuccin'] = {
+    'name': GLib.Variant('s', 'Soft Catppuccin'),
+    'effects': GLib.Variant('av', [GLib.Variant('a{sv}', {
+        'type': GLib.Variant('s', 'native_static_gaussian_blur'),
+        'id': GLib.Variant('s', 'effect_soft_catppuccin'),
+        'params': GLib.Variant('a{sv}', {'radius': GLib.Variant('i', 18), 'brightness': GLib.Variant('d', 0.78)})
+    })])
+}
+# Preserve all existing user pipelines while adding this profile.
+for key, pipeline in pipelines.items():
+    if key != 'pipeline_soft_catppuccin':
+        pipeline.clear()
+        original = root.get_value('pipelines').lookup_value(key, GLib.VariantType.new('a{sv}'))
+        for i in range(original.n_children()):
+            entry = original.get_child_value(i)
+            pipeline[entry.get_child_value(0).get_string()] = entry.get_child_value(1).get_variant()
+changes.insert(0, (root, 'pipelines', GLib.Variant('a{sa{sv}}', pipelines)))
+if check:
+    print('Validated', len(changes), 'settings against installed extension schemas.')
+    raise SystemExit(0)
+
+# Check session access before changing any setting.
+Gio.bus_get_sync(Gio.BusType.SESSION, None)
+backup_dir = Path.home() / '.local/share/blur-profile-backups'
+backup_dir.mkdir(parents=True, exist_ok=True)
+backup = backup_dir / (datetime.now().strftime('%Y%m%d-%H%M%S') + '.dconf')
+dump = subprocess.run(['dconf', 'dump', '/org/gnome/shell/extensions/blur-my-shell/'], check=True, capture_output=True)
+backup.write_bytes(dump.stdout)
+for obj, key, value in changes:
+    if not obj.set_value(key, value):
+        raise SystemExit('Unable to write: ' + key)
+Gio.Settings.sync()
+for obj, key, value in changes:
+    if obj.get_value(key) != value:
+        raise SystemExit('Verification failed: ' + key)
+print('Profil zapisany. Kopia ustawień:', backup)
+print('Wyloguj się i zaloguj ponownie, aby wczytać wyjątek Alt-Tab.')

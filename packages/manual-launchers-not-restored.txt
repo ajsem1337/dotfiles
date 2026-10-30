@@ -1,0 +1,15 @@
+statlocker-companion-handler.desktop
+statlocker-companion_amd64.desktop
+wine-extension-chm.desktop
+wine-extension-crt.desktop
+wine-extension-hlp.desktop
+wine-extension-msp.desktop
+wine-extension-reg.desktop
+wine-extension-vbs.desktop
+wine/Programs/Epic Games Launcher.desktop
+wine/Programs/HoYoPlay/HoYoPlay.desktop
+wine/Programs/HoYoPlay/Uninstall HoYoPlay.desktop
+wine/Programs/Ubisoft/Ubisoft Connect/Ubisoft Connect.desktop
+wine/Programs/Ubisoft/Ubisoft Connect/Uninstall.desktop
+wine/Programs/Ubisoft/UbisoftConnect/Ubisoft Connect.desktop
+wine/Programs/Ubisoft/UbisoftConnect/Uninstall.desktop

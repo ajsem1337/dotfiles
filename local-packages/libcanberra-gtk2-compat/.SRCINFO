@@ -1,0 +1,22 @@
+pkgbase = libcanberra-gtk2-compat
+	pkgdesc = GTK 2 event-sound bindings using the installed libcanberra backend
+	pkgver = 0.30
+	pkgrel = 2
+	url = https://0pointer.net/lennart/projects/libcanberra/
+	arch = x86_64
+	license = LGPL-2.1-or-later
+	makedepends = gcc
+	makedepends = make
+	makedepends = pkgconf
+	makedepends = libtool
+	depends = gtk2
+	depends = libcanberra.so=0-64
+	provides = libcanberra-gtk2
+	provides = libcanberra-gtk.so=0-64
+	conflicts = libcanberra-gtk2
+	options = !debug
+	options = !lto
+	source = https://0pointer.net/lennart/projects/libcanberra/libcanberra-0.30.tar.xz
+	sha256sums = c2b671e67e0c288a69fc33dc1b6f1b534d07882c2aceed37004bf48c601afa72
+
+pkgname = libcanberra-gtk2-compat

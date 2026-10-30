@@ -1,0 +1,9 @@
+{
+  "created": "2026-10-30T12:29:44.706256+01:00",
+  "format": 1,
+  "home_placeholder": "@HOME@",
+  "login_shell": "/usr/bin/fish",
+  "home_files": 78,
+  "gnome_keys": 623,
+  "private_keys_excluded": 2
+}

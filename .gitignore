@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.restore-backups/
+local-packages/*/src/
+local-packages/*/pkg/
+local-packages/*/*.pkg.tar.*
+local-packages/*/*.log
+local-packages/*/*.log.*

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=Vicinae Toggle
+Exec=systemd-run --user --quiet --collect --slice=app.slice vicinae toggle
+Type=Application
+NoDisplay=true
+Terminal=false

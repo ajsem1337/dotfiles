@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ScopeBuddy GUI
+Comment=Configure ScopeBuddy
+Exec=@HOME@/.local/bin/scopebuddygui
+Icon=io.github.rfrench3.scopebuddy-gui
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true

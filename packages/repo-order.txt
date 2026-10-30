@@ -1,0 +1,8 @@
+cachyos-v3
+cachyos-extra-v3
+cachyos-core-v3
+cachyos
+omarchy
+core
+extra
+multilib

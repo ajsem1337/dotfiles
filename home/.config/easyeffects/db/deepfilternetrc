@@ -1,0 +1,5 @@
+[sie][DeepFilterNet#0]
+attenuationLimit=35
+maxErbProcessingThreshold=25
+minProcessingThreshold=-15
+postFilterBeta=0

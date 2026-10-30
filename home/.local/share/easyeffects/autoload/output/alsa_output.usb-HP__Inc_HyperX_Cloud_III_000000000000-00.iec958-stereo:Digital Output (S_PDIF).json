@@ -1,0 +1,6 @@
+{
+    "device": "alsa_output.usb-HP__Inc_HyperX_Cloud_III_000000000000-00.iec958-stereo",
+    "device-description": "HyperX Cloud III Digital Stereo (IEC958)",
+    "device-profile": "Digital Output (S/PDIF)",
+    "preset-name": "Cloud 3 krakenish"
+}

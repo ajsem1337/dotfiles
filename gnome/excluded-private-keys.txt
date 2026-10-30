@@ -1,0 +1,2 @@
+org.gnome.shell:command-history
+org.gnome.shell:looking-glass-history
