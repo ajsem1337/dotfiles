@@ -37,7 +37,6 @@ def main():
         '.config/fish/config.fish', '.config/fish/functions',
         '.config/kitty/kitty.conf', '.config/kitty/current-theme.conf',
         '.config/fastfetch', '.config/fontconfig/conf.d',
-        '.local/share/fonts/DMMono',
         '.config/environment.d/10-qt.conf', '.config/environment.d/30-default-apps.conf',
         '.config/environment.d/40-cursor.conf',
         '.config/gtk-4.0/gtk.css', '.config/Kvantum', '.config/qt5ct', '.config/qt6ct',
@@ -173,7 +172,9 @@ end'''
                 if schema_id == 'org.gnome.shell' and key == 'enabled-extensions':
                     from gi.repository import GLib
                     value = GLib.Variant('as', active)
-                if key in ('command-history', 'looking-glass-history') or (re.search(r'password|secret|token|api.?key|latitude|longitude|location', key, re.I) and value.get_type_string() != 'b'):
+                # Alphabetical App Grid arranges the installed apps itself;
+                # the cached app grid would export an unrelated app inventory.
+                if key in ('command-history', 'looking-glass-history', 'app-picker-layout') or (re.search(r'password|secret|token|api.?key|latitude|longitude|location', key, re.I) and value.get_type_string() != 'b'):
                     skipped.append(schema_id + ':' + key)
                     continue
                 (system_settings if schema_id in system_schemas else settings).append({'schema': schema_id, 'key': key, 'value': value.print_(True).replace(str(HOME), '@HOME@'), 'schema_dir': directory})

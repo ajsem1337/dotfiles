@@ -1,96 +1,37 @@
 # Sprawdzenie konfiguracji — 2026-11-05
 
-- Przepis wyglądu: 28 pakietów repo i 7 AUR. Opcjonalny system: 23 repo
-  i 3 AUR. `pacman -T` potwierdził obecność zależności, a nazwy repo są
-  dostępne w skonfigurowanych źródłach. Nie instalowano pełnego zestawu
-  na świeżej maszynie.
-- Audio, wszystkie zapisane pliki EasyEffects/PipeWire, dźwięki GNOME,
-  ScopeBuddy i tablet przeniesiono do `system/`. `--all` nie wywołuje
-  odtwarzania tej części; test sprawdza również rozdział pakietów AUR.
-- Z `home/` usunięto standardowe pliki Bash, puste Millennium Quick CSS,
-  skojarzenia MIME, cache i launchery niezwiązanych programów. Zostały
-  trzy uzasadnione pliki desktop: dwa dla skrótów Vicinae i Micro w Kitty.
-- `assets/appearance.tar.gz` zebrano ponownie z działającej konfiguracji.
-  `assets/manifest.json` zapisuje datę i sześć grup zasobów. Stare
-  `desktop.tar.gz` usunięto. W nowym archiwum nie ma repozytorium dotfiles.
-- GNOME: 583 ustawienia wyglądu/skróty i 43 ustawienia systemowe. Manifest
-  obejmuje 10 obecnych rozszerzeń, w tym Tiling Shell 18.0; usunięto z eksportu
-  5 wpisów bez zainstalowanych plików. Bieżące układy i autotiling są zapisane.
-- `check-keybindings.py` oraz `--live`: 148 efektywnych skrótów, brak kolizji.
-  Test wykrywa równoważność Ctrl/Control/Primary i respektuje zastąpienie
-  domyślnych skrótów multimedialnych. Super + strzałki należą do Tiling Shell;
-  odpowiedniki GNOME są wyłączone, a stan przywracania rozszerzenia zachowany.
-- Ustawienia rozszerzeń i klawiszy są stosowane przed włączeniem rozszerzeń.
-- Vicinae zachowuje konfigurację, motyw, font i dwa skróty; zależność
-  `ttf-firacode-nerd` dopisano na podstawie ustawionego fontu.
-- Equicord ma zapisany i włączony System24. Test scalania JSON potwierdza
-  zachowanie konta, ustawień wtyczek i zagnieżdżonych opcji, utworzenie kopii,
-  idempotencję i zatrzymanie bez nadpisania przy błędnym JSON.
-- Steam: GNOME Mocha Pink to lokalny arkusz 5695 B. `check-steam-theme.py`
-  potwierdził brak skryptów/importów/rozmycia oraz obecność 30 klas układu
-  w plikach zainstalowanego klienta. Makietę wyrenderowano i obejrzano
-  w headless Floorp. To nie jest zrzut klienta ani benchmark płynności.
-- Motyw Steama zastosowano po potwierdzeniu zamknięcia klienta, z kopią
-  poprzedniej konfiguracji Millennium. Pozostałe ustawienia zostały zachowane.
-  Przy odtwarzaniu świeżej instalacji powstają standardowe linki bootstrapu
-  do bibliotek z pakietu AUR, bez kopiowania instalacji Steama do repo.
-- Dziesięć testów jednostkowych: OK. Sprawdzone również przenośność,
-  ochrona przed wyjściem archiwum/symlinków poza katalog i rozdział zakresów.
-- Pełne odtworzenie wyglądu i osobne odtworzenie systemowych plików użytkownika
-  do pustych katalogów: odpowiednio 47 083 i 63 pliki. Ponowne uruchomienia: 0 zmian.
-- Składnia Pythona, `verify.py` i kontrola diff: OK.
+Bieżący eksport: `snapshot.json` i `assets/manifest.json` z 17:29 CET.
+
+- Wygląd: 27 pakietów repo i 6 AUR. `pacman -T` potwierdził obecność
+  wszystkich zależności przepisu w bieżącej instalacji. Opcjonalny profil
+  systemowy nadal ma 23 pakiety repo i 3 AUR.
+- Eksport zawiera 33 pliki w `home/`, 582 ustawienia wyglądu i skrótów GNOME,
+  43 ustawienia systemowe GNOME oraz 62 pliki w `system/home/`.
+- Archiwum wyglądu zebrano ponownie z bieżących zasobów. Zawiera motyw
+  GTK/GNOME Shell, ikony, kursor i kod 11 rozszerzeń z licencjami.
+- Dodane Rounded Window Corners Native: wersja 5, nazwa wersji 51.0,
+  UUID `rounded-window-corners@ztrahmet.github.io`. `gnome-extensions info`
+  potwierdza Enabled: Yes i State: ACTIVE. Rozszerzenie nie ma własnego
+  schematu ustawień ani skrótów; czyta wygląd z libadwaity i użytkowego GTK4 CSS.
+- Zapisany i bieżący profil: 148 efektywnych skrótów, brak kolizji.
+  Super + strzałki należą do Tiling Shell; natywne odpowiedniki są wyłączone.
+- Pięć nieobecnych rozszerzeń pominięto w liście do włączenia. Cache pozycji
+  całej siatki aplikacji nie jest eksportowany; układ porządkuje zapisane
+  Alphabetical App Grid. Pomijana jest też historia konsoli i dane prywatne.
+- Odtwarzanie wyglądu do pustego katalogu: 47 088 zmian, drugie uruchomienie:
+  0 zmian. Nowe rozszerzenie i jego licencja są na miejscu. Nie powstają
+  katalogi ani konfiguracje usuniętych z profilu aplikacji.
+- Osobne odtwarzanie systemowych plików użytkownika: 63 zmiany, drugie
+  uruchomienie: 0 zmian. Ustawienia EasyEffects/PipeWire, ScopeBuddy i tabletu
+  są w `system/`; `--all` nie stosuje tej części.
+- Dziesięć testów jednostkowych: OK. Obejmują rozdział zakresów i pakietów,
+  zachowanie ustawień konta przy scalaniu wyglądu, kopie, idempotencję,
+  odrzucanie błędnego JSON i niebezpiecznych ścieżek oraz konfigurację Micro roota.
+- `verify.py`: sumy kontrolne, przenośne ścieżki, układ archiwum i wzorce
+  danych uwierzytelniających — OK. Składnia Pythona i kontrola diff — OK.
+- `--all --plan` pokazuje aktualny przepis wyglądu. Nie wykonywano ponownej
+  instalacji całego zestawu na świeżym systemie ani zmian zapory i schedulera.
 
 Wcześniejsza migracja libcanberra z tego samego dnia pozostaje zweryfikowana:
 73 pliki paczki `libcanberra-gtk2`, 0 zmienionych; komplet SONAME, brak błędów
 bazy pacmana; GTK2 i GTK3 ładują moduły, oba konteksty audio zwracają 0.
-Nie uruchamiano ponownie ustawień zapory ani schedulera podczas tej korekty.
-
-Korekta płaskiego wyglądu Steama: wyzerowane promienie rogów, usunięta
-wewnętrzna ramka oraz jednolite tło Mocha bibliotek, półek i panelu bocznego.
-Render sprawdza również nadpisanie gradientów z oryginalnego CSS klienta
-i zachowanie grafik na kartach.
-
-Port stylistyki System24 do Steama:
-
-- Nowy wariant System24-Mocha-Pink jest domyślny w zapisanym wyborze Millennium;
-  GNOME Mocha Pink pozostaje alternatywą.
-- Font DM Mono Light/Regular/Medium jest dołączony z oficjalnego Google Fonts,
-  razem z OFL 1.1; pliki binarne są objęte sumami kontrolnymi.
-- Kontrola klas obejmuje oba motywy. System24 używa lokalnego CSS, bez JS,
-  importów sieciowych, rozmycia i własnych animacji.
-- Render sprawdza monospace, etykiety ASCII, obramowania i zachowanie grafik;
-  nie stanowi pełnego testu wszystkich ekranów klienta ani benchmarku.
-
-System24: arkusz 9996 B, 35 klas obecne w plikach klienta. Render potwierdził
-DM Mono, etykiety ASCII, ramki, proste krawędzie, brak gradientów tła oraz
-zachowanie grafik. Wariant zainstalowano i wybrano przy zamkniętym Steamie.
-
-Korekta układu System24 po zrzucie działającego klienta:
-
-- Nawiasy nawigacji i blokowy tytuł zakładki są w jednym wierszu flex;
-  aktywna zakładka dziedziczy różowy akcent zamiast natywnego niebieskiego blasku.
-- Ramki kategorii usunięto z kontenerów całych grup. Akcent dotyczy wyłącznie
-  tekstu nazwy kategorii.
-- Usunięto własne marginesy, padding i widoczne obramowanie wirtualizowanej
-  półki. Etykieta i ramka są na nagłówku; kolejne rzędy okładek nie przecinają ramki.
-- Regresję odtworzono z domyślnymi regułami CSS Steama, blokowym elementem
-  tytułu oraz absolutnie pozycjonowanymi rzędami gier. Przy szerokościach
-  960 i 1729 px poprzedni CSS oblewa testy nawigacji, ramek i geometrii półki,
-  a poprawiony przechodzi wszystkie dziewięć kontroli. To test struktury,
-  nie automatyczny test całego działającego klienta.
-
-System24 1.2.0 — strona konkretnej gry:
-
-- Arkusz 13 235 B; wszystkie 61 klas znaleziono w zainstalowanym kliencie.
-- Dodano styl tła strony, paska uruchamiania, linków, aktywności, prośby
-  o recenzję, znajomych, osiągnięć i dodatkowej zawartości.
-- Makieta z natywnymi regułami i klasami strony gry została wyrenderowana
-  w Floorp przy szerokościach 960 i 1729 px. Osiem kontroli wyglądu
-  nie przechodziło na poprzednim CSS; wszystkie przechodzą po poprawce.
-  Obejmują tła, gradienty kart, DM Mono, nagłówki i trzy stany przycisku.
-- Wysokość grafiki, szerokości obu kontenerów kolumn, reguła flex panelu
-  bocznego oraz display strony są identyczne przed zmianą i po niej.
-  Grafika pozostaje widoczna. Test nie potwierdza wszystkich wariantów
-  ekranów działającego klienta ani jego wydajności.
-- Aktualizacja plików motywu nie wymaga modyfikowania konfiguracji konta.
-  Wczytanie nowego CSS wymaga pełnego zakończenia i uruchomienia Steama.

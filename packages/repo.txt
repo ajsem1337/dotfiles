@@ -34,6 +34,5 @@ fastfetch
 micro
 bat
 
-# Steam z lokalnym motywem Millennium i motywy aplikacji Flatpak
-steam
+# Motywy aplikacji Flatpak
 flatpak

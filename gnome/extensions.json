@@ -89,6 +89,15 @@
       "settings-schema": "org.gnome.shell.extensions.tilingshell",
       "source": "user",
       "enabled": true
+    },
+    {
+      "uuid": "rounded-window-corners@ztrahmet.github.io",
+      "name": "Rounded Window Corners Native",
+      "version": 5,
+      "version-name": "51.0",
+      "settings-schema": null,
+      "source": "user",
+      "enabled": true
     }
   ],
   "missing_enabled_entries_removed": [

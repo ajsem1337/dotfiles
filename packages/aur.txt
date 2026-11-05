@@ -8,9 +8,8 @@ maplemono-nf
 qt5-wayland-decorations
 qadwaitadecorations-qt6
 
-# Launcher i motyw klienta Steam
+# Launcher
 vicinae-bin
-millennium
 
 # Instalator Equicorda; samo wstrzyknięcie do Discorda wykonuje się w jego GUI
 equicord-installer-bin

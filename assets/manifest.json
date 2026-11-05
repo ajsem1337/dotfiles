@@ -1,5 +1,5 @@
 {
-  "created": "2026-11-05T16:01:42.984229+01:00",
+  "created": "2026-11-05T17:29:40.610079+01:00",
   "archive": "appearance.tar.gz",
   "resources": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "path": ".local/share/gnome-shell/extensions",
-      "files": 607
+      "files": 618
     }
   ]
 }

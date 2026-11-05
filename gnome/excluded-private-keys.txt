@@ -1,2 +1,3 @@
+org.gnome.shell:app-picker-layout
 org.gnome.shell:command-history
 org.gnome.shell:looking-glass-history

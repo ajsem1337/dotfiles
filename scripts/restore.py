@@ -37,9 +37,6 @@ def render(data, home):
 
 def restore_home(home, root=ROOT):
     home = home.resolve()
-    if home == Path.home().resolve() and (root / 'themes/apps/millennium.json').is_file():
-        if subprocess.run(['pgrep', '-u', str(os.getuid()), '-x', 'steam'], capture_output=True).returncode == 0:
-            raise RuntimeError('Zamknij Steama przed odtwarzaniem jego motywu i ustawień Millennium.')
     home.mkdir(parents=True, exist_ok=True)
     backup = home / '.local/state/dotfiles-backups' / datetime.now().strftime('%Y%m%d-%H%M%S-%f')
     count = 0
@@ -101,28 +98,6 @@ def restore_home(home, root=ROOT):
                 install_tree(source, Path(source.name))
     for source in sorted((root / 'home').iterdir()):
         install_tree(source, Path(source.name), template=True)
-    for source in sorted((root / 'themes/steam').glob('*')):
-        install_tree(source, Path('.local/share/Steam/millennium/themes') / source.name)
-    if (root / 'themes/steam').is_dir():
-        # The AUR post-install hook cannot link Millennium before Steam has
-        # created its per-user directories. Reproduce its two fixed links.
-        for arch, library in (('ubuntu12_32', 'libmillennium_bootstrap_x86.so'),
-                              ('ubuntu12_64', 'libmillennium_bootstrap_hhx64.so')):
-            backend = Path('/usr/lib/millennium') / library
-            if not backend.is_file():
-                continue
-            relative = Path('.local/share/Steam') / arch / 'libXtst.so.6'
-            dest = home / relative
-            if not dest.parent.resolve().is_relative_to(home):
-                raise ValueError('Steam path escapes home: ' + str(dest))
-            if dest.is_symlink() and os.readlink(dest) == str(backend):
-                continue
-            if dest.exists() or dest.is_symlink():
-                save(dest, relative)
-                dest.unlink()
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.symlink_to(backend)
-            count += 1
     # Merge appearance switches without replacing account/plugin/proxy settings.
     for patch in sorted((root / 'themes/apps').glob('*.json')):
         payload = json.loads(patch.read_text())

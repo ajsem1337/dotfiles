@@ -1237,12 +1237,6 @@
   },
   {
     "schema": "org.gnome.shell",
-    "key": "app-picker-layout",
-    "value": "[{'anydesk.desktop': <{'position': <0>}>, 'b0d59c7c-74a5-40c3-b56f-e25e199bce2c': <{'position': <1>}>, 'org.gnome.Boxes.desktop': <{'position': <2>}>, 'brave-origin.desktop': <{'position': <3>}>, 'io.github.celluloid_player.Celluloid.desktop': <{'position': <4>}>, 'cmake-gui.desktop': <{'position': <5>}>, 'org.gnome.Connections.desktop': <{'position': <6>}>, 'dev.stormix.deadlock-mod-manager.desktop': <{'position': <7>}>, 'discord.desktop': <{'position': <8>}>, 'org.gnome.baobab.desktop': <{'position': <9>}>, 'org.gnome.SimpleScan.desktop': <{'position': <10>}>, 'org.gnome.Evince.desktop': <{'position': <11>}>, 'org.gnome.Papers.desktop': <{'position': <12>}>, 'com.github.wwmm.easyeffects.desktop': <{'position': <13>}>, 'wine-Programs-Epic Games Launcher.desktop': <{'position': <14>}>, 'equibop.desktop': <{'position': <15>}>, 'com.mattjakeman.ExtensionManager.desktop': <{'position': <16>}>, 'org.gnome.FileRoller.desktop': <{'position': <17>}>, 'io.github.cboxdoerfer.FSearch.desktop': <{'position': <18>}>, 'lstopo.desktop': <{'position': <19>}>, 'wine-Programs-HoYoPlay-HoYoPlay.desktop': <{'position': <20>}>, 'hplip.desktop': <{'position': <21>}>, 'hp-uiscan.desktop': <{'position': <22>}>, 'org.gnome.Loupe.desktop': <{'position': <23>}>}, {'kitty.desktop': <{'position': <0>}>, 'kvantummanager.desktop': <{'position': <1>}>, '81fd0ac6-2520-404c-a1d9-ac6f83373288': <{'position': <2>}>, 'org.gnome.Logs.desktop': <{'position': <3>}>, 'net.lutris.Lutris.desktop': <{'position': <4>}>, 'cups.desktop': <{'position': <5>}>, 'micro.desktop': <{'position': <6>}>, 'io.missioncenter.MissionCenter.desktop': <{'position': <7>}>, 'mpv.desktop': <{'position': <8>}>, 'nvtop.desktop': <{'position': <9>}>, 'onlyoffice-desktopeditors.desktop': <{'position': <10>}>, 'opentabletdriver.desktop': <{'position': <11>}>, 'osu-lazer.desktop': <{'position': <12>}>, 'ar.com.softwareperonista.Pace.desktop': <{'position': <13>}>, 'org.moson.pacseek.desktop': <{'position': <14>}>, 'org.gnome.seahorse.Application.desktop': <{'position': <15>}>, 'com.github.th-ch.youtube-music.desktop': <{'position': <16>}>, 'com.vysp3r.ProtonPlus.desktop': <{'position': <17>}>, 'protontricks.desktop': <{'position': <18>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <19>}>, 'qt5ct.desktop': <{'position': <20>}>, 'qt6ct.desktop': <{'position': <21>}>, 'com.devolutions.remotedesktopmanager.desktop': <{'position': <22>}>, 'io.github.rfrench3.scopebuddy-gui.desktop': <{'position': <23>}>}, {'org.gnome.Settings.desktop': <{'position': <0>}>, 'com.shellyorg.shelly.desktop': <{'position': <1>}>, 'statlocker-companion_amd64.desktop': <{'position': <2>}>, 'steam.desktop': <{'position': <3>}>, 'org.gnome.tweaks.desktop': <{'position': <4>}>, 'wine-Programs-Ubisoft-UbisoftConnect-Ubisoft Connect.desktop': <{'position': <5>}>, 'wine-Programs-Ubisoft-Ubisoft Connect-Ubisoft Connect.desktop': <{'position': <6>}>, 'wine-Programs-Ubisoft-Ubisoft Connect-Uninstall.desktop': <{'position': <7>}>, 'wine-Programs-Ubisoft-UbisoftConnect-Uninstall.desktop': <{'position': <8>}>, 'wine-Programs-HoYoPlay-Uninstall HoYoPlay.desktop': <{'position': <9>}>, 'bbd6e204-00ff-40de-ae7d-30022f045de6': <{'position': <10>}>, 'vicinae.desktop': <{'position': <11>}>, 'code.desktop': <{'position': <12>}>, 'com.microsoft.VSCode.desktop': <{'position': <13>}>, 'org.gnome.Weather.desktop': <{'position': <14>}>, 'winetricks.desktop': <{'position': <15>}>, 'wootility.desktop': <{'position': <16>}>, 'com.github.xournalpp.xournalpp.desktop': <{'position': <17>}>}]",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.shell",
     "key": "disable-user-extensions",
     "value": "false",
     "schema_dir": null
@@ -1274,13 +1268,13 @@
   {
     "schema": "org.gnome.shell",
     "key": "enabled-extensions",
-    "value": "['user-theme@gnome-shell-extensions.gcampax.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'weatheroclock@CleoMenezesJr.github.io', 'fullscreen-avoider@noobsai.github.com', 'vicinae@dagimg-dot', 'quick-settings-audio-panel@rayzeq.github.io', 'appindicatorsupport@rgcjonas.gmail.com', 'logomenu@aryan_k', 'blur-my-shell@aunetx', 'tilingshell@ferrarodomenico.com']",
+    "value": "['user-theme@gnome-shell-extensions.gcampax.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'weatheroclock@CleoMenezesJr.github.io', 'fullscreen-avoider@noobsai.github.com', 'vicinae@dagimg-dot', 'quick-settings-audio-panel@rayzeq.github.io', 'appindicatorsupport@rgcjonas.gmail.com', 'logomenu@aryan_k', 'blur-my-shell@aunetx', 'tilingshell@ferrarodomenico.com', 'rounded-window-corners@ztrahmet.github.io']",
     "schema_dir": null
   },
   {
     "schema": "org.gnome.shell",
     "key": "disabled-extensions",
-    "value": "['status-icons@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']",
+    "value": "['status-icons@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'rounded-window-corners@fxgn']",
     "schema_dir": null
   },
   {

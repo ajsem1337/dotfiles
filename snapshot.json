@@ -1,16 +1,16 @@
 {
-  "created": "2026-11-05T16:01:43.459317+01:00",
+  "created": "2026-11-05T17:29:41.095426+01:00",
   "format": 2,
   "home_placeholder": "@HOME@",
   "login_shell": "/usr/bin/fish",
-  "home_files": 38,
-  "gnome_keys": 583,
+  "home_files": 33,
+  "gnome_keys": 582,
   "system_gnome_keys": 43,
   "system_home_files": 62,
-  "private_keys_excluded": 2,
+  "private_keys_excluded": 3,
   "appearance_packages": {
-    "repo": 28,
-    "aur": 7
+    "repo": 27,
+    "aur": 6
   },
   "system_packages": {
     "repo": 23,

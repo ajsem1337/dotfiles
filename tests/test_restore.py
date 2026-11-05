@@ -22,7 +22,7 @@ keybindings = load('check-keybindings')
 
 class RestoreTests(unittest.TestCase):
     def test_default_package_restore_excludes_optional_system_packages(self):
-        recipes = {'repo.txt': ['kitty'], 'aur.txt': ['millennium'],
+        recipes = {'repo.txt': ['kitty'], 'aur.txt': ['vicinae-bin'],
                    'system.txt': ['nftables'], 'system-aur.txt': ['libcanberra-gtk2']}
         for include_system in (False, True):
             with self.subTest(include_system=include_system), \
@@ -35,14 +35,14 @@ class RestoreTests(unittest.TestCase):
                 self.assertIn('kitty', repo_command)
                 self.assertEqual('nftables' in repo_command, include_system)
                 self.assertFalse(any('--prepare-repos' in cmd for cmd in commands))
-                self.assertTrue(any('millennium' in cmd and cmd[0] == 'paru' for cmd in commands))
+                self.assertTrue(any('vicinae-bin' in cmd and cmd[0] == 'paru' for cmd in commands))
                 self.assertEqual(any('libcanberra-gtk2' in cmd for cmd in commands), include_system)
         with patch.object(restore, 'lines', side_effect=recipes.__getitem__), \
              patch.object(restore.shutil, 'which', return_value='/usr/bin/paru'), \
              patch.object(restore, 'run') as run:
             restore.install_packages(include_system=True, include_appearance=False)
             commands = [call.args[0] for call in run.call_args_list]
-            self.assertFalse(any('kitty' in cmd or 'millennium' in cmd for cmd in commands))
+            self.assertFalse(any('kitty' in cmd or 'vicinae-bin' in cmd for cmd in commands))
             self.assertTrue(any('nftables' in cmd for cmd in commands))
 
     def test_shortcut_aliases_and_media_override(self):
