@@ -1,20 +1,17 @@
-ani-cli
-anydesk-bin
-deepfilternet-plus-bin
-equicord-installer-bin
-gnome-rounded-blur
+# Silnik motywu GTK2 i moduły dźwięku GTK2/GTK3
 gtk-engine-murrine
 libcanberra-gtk2
+
+# Font terminala Kitty
 maplemono-nf
-millennium
-oci-cli
-osu-lazer-bin
-pace
-pacseek
-qadwaitadecorations-qt6
+
+# Zachowane dekoracje Qt na Waylandzie
 qt5-wayland-decorations
-remote-desktop-manager
-scopebuddy
-system-health
+qadwaitadecorations-qt6
+
+# Efekt DeepFilterNet z presetu mikrofonu EasyEffects
+deepfilternet-plus-bin
+
+# Zapisana konfiguracja launchera i ScopeBuddy
 vicinae-bin
-wootility
+scopebuddy

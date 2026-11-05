@@ -5,6 +5,7 @@ import json
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,6 +20,37 @@ system = load('system')
 root_micro = load('configure-root-micro')
 
 class RestoreTests(unittest.TestCase):
+    def test_default_package_restore_excludes_optional_system_packages(self):
+        recipes = {'repo.txt': ['kitty'], 'aur.txt': ['libcanberra-gtk2'],
+                   'system.txt': ['nftables']}
+        for include_system in (False, True):
+            with self.subTest(include_system=include_system), \
+                 patch.object(restore, 'lines', side_effect=recipes.__getitem__), \
+                 patch.object(restore.shutil, 'which', return_value='/usr/bin/paru'), \
+                 patch.object(restore, 'run') as run:
+                restore.install_packages(include_system=include_system)
+                commands = [call.args[0] for call in run.call_args_list]
+                repo_command = next(cmd for cmd in commands if cmd[:2] == ['sudo', 'pacman'])
+                self.assertIn('kitty', repo_command)
+                self.assertEqual('nftables' in repo_command, include_system)
+                self.assertFalse(any('--prepare-repos' in cmd for cmd in commands))
+                self.assertTrue(any('libcanberra-gtk2' in cmd and cmd[0] == 'paru'
+                                    for cmd in commands))
+
+    def test_all_restores_desktop_and_root_micro_without_system_changes(self):
+        with patch.object(restore.sys, 'argv', ['restore.py', '--all']), \
+             patch.object(restore, 'install_packages') as packages, \
+             patch.object(restore, 'restore_home') as home, \
+             patch.object(restore, 'restore_gnome') as gnome, \
+             patch.object(restore, 'run') as run:
+            restore.main()
+        packages.assert_called_once_with(include_system=False)
+        home.assert_called_once()
+        gnome.assert_called_once()
+        commands = [list(map(str, call.args[0])) for call in run.call_args_list]
+        self.assertTrue(any(cmd[-1].endswith('/configure-root-micro.py') for cmd in commands))
+        self.assertFalse(any('--apply' in cmd or '--prepare-repos' in cmd for cmd in commands))
+
     def test_root_micro_preserves_settings_backups_and_idempotence(self):
         with tempfile.TemporaryDirectory() as td:
             base = Path(td)

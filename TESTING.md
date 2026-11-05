@@ -1,5 +1,28 @@
 # Sprawdzenie kopii — 2026-11-05
 
+## Przepis na konfigurację
+
+- Główne listy ograniczono do 37 pakietów repo i 8 pakietów AUR, powiązanych
+  z zapisaną konfiguracją. Weryfikacja `pacman -T` potwierdziła ich obecność;
+  wszystkie nazwy z listy repo są dostępne w skonfigurowanych repozytoriach.
+- Sprawdzono właścicieli wtyczek integracji Qt z GTK3: odpowiednio
+  `qt5-base` i `qt6-base`. Dodano `qt5ct` i `qt6ct`, których pliki są zapisane.
+- Presety EasyEffects korzystają z efektów Calf, LSP i DeepFilterNet,
+  dlatego te dodatki są częścią przepisu. Rozszerzenia GNOME importują
+  GWeather, dostarczane przez `libgweather-4`.
+- Usunięto pełne inwentarze pakietów i wersji oraz wykazy aplikacji Flatpak
+  i starych repozytoriów. `capture.py` nie generuje ich i nie modyfikuje
+  ręcznie utrzymywanych list zależności.
+- `--all` obejmuje pulpit i Micro roota; test potwierdza brak wywołań etapu
+  systemowego i zmiany repozytoriów. Sześć zależności zapory, sieci i schedulera
+  znajduje się w osobnej liście `system.txt`, używanej tylko z `--system`.
+- Siedem testów jednostkowych: OK. Test instalowania pakietów potwierdza
+  pomijanie pakietów systemowych domyślnie i dołączanie ich wyłącznie na żądanie.
+- Sprawdzono plany odtwarzania, składnię Pythona, sumy kontrolne i diff.
+  Przy tej korekcie przepisu nie instalowano ani nie usuwano pakietów na hoście.
+
+## Wykonana migracja libcanberra i kontrole plików
+
 - Migracja wykonana na działającym systemie: `libcanberra` i
   `libcanberra-gtk2-compat` zastąpione w jednej transakcji pacmana przez
   `libcanberra-gtk2 1:0.30+r2+gc0620e4-6` z AUR. Bez wymuszania zależności
@@ -33,8 +56,6 @@
   compat. Odinstalowano cztery pakiety doinstalowane wyłącznie do budowy:
   `gtk-doc`, `docbook-xml`, `docbook-xsl`, `glib2-docs`.
 
-Lista wersji zachowuje historyczny stan pozostałych pakietów; wpisy dotyczące
-tej migracji i sześciu wymienionych programów zaktualizowano 2026-11-05.
 Nie przeprowadzano pełnej instalacji pakietów na świeżej maszynie.
 
 ## Wcześniejsze kontrole — 2026-10-30

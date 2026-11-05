@@ -144,9 +144,8 @@ def restore_gnome():
         run(['chsh', '-s', shell])
     print('Kopia ustawień GNOME:', directory / 'gnome-before.json')
 
-def install_packages():
-    run(['sudo', sys.executable, ROOT / 'scripts/system.py', '--prepare-repos'])
-    names = sorted(set(lines('repo.txt') + lines('desktop-required.txt')))
+def install_packages(include_system=False):
+    names = sorted(set(lines('repo.txt') + (lines('system.txt') if include_system else [])))
     run(['sudo', 'pacman', '-Syu', '--needed', '--', *names])
     aur = lines('aur.txt')
     if aur:
@@ -160,28 +159,34 @@ def install_packages():
 
 def main():
     parser = argparse.ArgumentParser(description='Odtworzenie konfiguracji CachyOS/GNOME. Bez flag pokazuje tylko plan.')
-    for flag in ('home', 'gnome', 'system', 'packages', 'all', 'plan'):
+    for flag in ('home', 'gnome', 'root-micro', 'system', 'packages', 'all', 'plan'):
         parser.add_argument('--' + flag, action='store_true')
     parser.add_argument('--target-home', type=Path, default=Path.home(), help='Osobny katalog do testu --home; bez operacji systemowych.')
     args = parser.parse_args()
     if os.geteuid() == 0:
         parser.error('Uruchom restore.sh jako zwykły użytkownik; skrypt sam używa sudo dla systemu.')
     if args.all:
-        args.home = args.gnome = args.system = args.packages = True
-    if args.target_home.resolve() != Path.home().resolve() and (args.gnome or args.system or args.packages):
+        args.home = args.gnome = args.root_micro = args.packages = True
+    if args.target_home.resolve() != Path.home().resolve() and (args.gnome or args.root_micro or args.system or args.packages):
         parser.error('--target-home obsługuje wyłącznie bezpieczny test --home.')
-    if args.plan or not any((args.home, args.gnome, args.system, args.packages)):
+    if args.plan or not any((args.home, args.gnome, args.root_micro, args.system, args.packages)):
         print((ROOT / 'snapshot.json').read_text())
-        print('Plan: pakiety i repozytoria → pliki użytkownika → GNOME → ustawienia systemowe.')
-        print('Nie kopiujemy partycji, rozruchu, haseł, kont ani profili przeglądarek. Użyj --all po świeżej instalacji CachyOS GNOME.')
+        print('Plan --all: zależności konfiguracji → pliki użytkownika → GNOME → Micro roota.')
+        print('Repo:', ' '.join(lines('repo.txt')))
+        print('AUR:', ' '.join(lines('aur.txt')))
+        if args.system:
+            print('Dodatkowe pakiety --system:', ' '.join(lines('system.txt')))
+        print('Zapora, sieć i scheduler wymagają osobnego --system. Bazą jest gotowa instalacja CachyOS GNOME.')
         return
     run([sys.executable, ROOT / 'scripts/verify.py'])
     if args.packages:
-        install_packages()
+        install_packages(include_system=args.system)
     if args.home:
         restore_home(args.target_home)
     if args.gnome:
         restore_gnome()
+    if args.root_micro:
+        run(['sudo', sys.executable, ROOT / 'scripts/configure-root-micro.py'])
     if args.system:
         run(['sudo', sys.executable, ROOT / 'scripts/system.py', '--apply'])
     print('Gotowe. Wyloguj i zaloguj się ponownie, aby wszystkie aplikacje odczytały konfigurację.')

@@ -1,0 +1,9 @@
+# Wyłącznie dla opcjonalnego: ./restore.sh --packages --system
+# Nie jest częścią zwykłego ./restore.sh --all.
+# Zależności zapisanych plików /etc i usług; bez kerneli, sterowników i rozruchu.
+avahi
+nftables
+nss-mdns
+networkmanager
+scx-scheds
+scx-tools
