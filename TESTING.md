@@ -78,3 +78,19 @@ Korekta układu System24 po zrzucie działającego klienta:
   960 i 1729 px poprzedni CSS oblewa testy nawigacji, ramek i geometrii półki,
   a poprawiony przechodzi wszystkie dziewięć kontroli. To test struktury,
   nie automatyczny test całego działającego klienta.
+
+System24 1.2.0 — strona konkretnej gry:
+
+- Arkusz 13 235 B; wszystkie 61 klas znaleziono w zainstalowanym kliencie.
+- Dodano styl tła strony, paska uruchamiania, linków, aktywności, prośby
+  o recenzję, znajomych, osiągnięć i dodatkowej zawartości.
+- Makieta z natywnymi regułami i klasami strony gry została wyrenderowana
+  w Floorp przy szerokościach 960 i 1729 px. Osiem kontroli wyglądu
+  nie przechodziło na poprzednim CSS; wszystkie przechodzą po poprawce.
+  Obejmują tła, gradienty kart, DM Mono, nagłówki i trzy stany przycisku.
+- Wysokość grafiki, szerokości obu kontenerów kolumn, reguła flex panelu
+  bocznego oraz display strony są identyczne przed zmianą i po niej.
+  Grafika pozostaje widoczna. Test nie potwierdza wszystkich wariantów
+  ekranów działającego klienta ani jego wydajności.
+- Aktualizacja plików motywu nie wymaga modyfikowania konfiguracji konta.
+  Wczytanie nowego CSS wymaga pełnego zakończenia i uruchomienia Steama.

@@ -300,3 +300,83 @@ body.DesktopUI, body.ModalDialogPopup, body.friendsui-container,
 .DesktopUI ._7AlhCx3XGzBeIrQaCneUD ._19axKcqYRuaJ8vdYKYmtTQ::after {
     display: none !important;
 }
+
+/* Individual library game page. Colors and typography only: native hero,
+ * sticky controls, scrolling columns and virtualized activity keep geometry.
+ */
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA,
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(
+    ._2l416KfEtI4CL0mCUEmOBw, ._1SvpjsckP9cPRxO6gCBHrw,
+    ._1_cYNJSvS6IXs9vLTEYjy5, .OhSdLYuggDtBcWjYP0j_9,
+    ._2aor4XVOYzN1PBSREk0UbO, ._1U7LKpx70kEsz3jJwAFOi-,
+    ._3fLo166MlaNqP8r8tTyRz, ._3Y87YQY56ZCOqhgcZFaDc5
+) {
+    background: var(--s24-window) !important;
+    color: var(--s24-text) !important;
+    box-shadow: none !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA,
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(
+    div, span, p, h1, h2, h3, a, button, input, textarea, label,
+    ._2r4TK4BAuU-J4FuF_O7v_5
+) {
+    font-family: var(--s24-font) !important;
+    letter-spacing: -0.05ch !important;
+}
+/* Framed activity/review/sidebar cards without extra borders or spacing. */
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(
+    ._31ptFGGMZrSQc5BCX1e5lm, ._5uvIN6jXDXzzck59F-nhv,
+    ._3LE-6w1ItIAB4CKJFCa3Od, ._1HZy7BvOZuPT8feUwadL4W,
+    .LibriMVXcLl1HB60ZUp78, .HAvWsE0-ycDj77SdyLXE-,
+    .UVeN0kaD3zv1feMj_mMw5, ._3x31AgESSlUqX3D4MTHv2m,
+    ._3-V8vjmrwuJM6Ws3tsjFJj
+) {
+    background: var(--s24-window) !important;
+    color: var(--s24-text) !important;
+    border-radius: 0 !important;
+    box-shadow: inset 0 0 0 1px var(--s24-line) !important;
+}
+/* Do not draw an additional frame on a card's padding wrapper. */
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA ._5uvIN6jXDXzzck59F-nhv {
+    box-shadow: none !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(h2, h2 div, h2 span, ._1Q2q_tQ9_Eq8YdEHNAHS3F) {
+    color: var(--s24-accent) !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA a {
+    color: var(--s24-accent) !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(button, ._3Cdin80d-hVsakHUZboheb) {
+    background: var(--s24-card) !important;
+    color: var(--s24-text) !important;
+    border-radius: 0 !important;
+    box-shadow: inset 0 0 0 1px var(--s24-line) !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(button:hover, ._3Cdin80d-hVsakHUZboheb:hover) {
+    box-shadow: inset 0 0 0 1px var(--s24-accent) !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA :is(textarea, input) {
+    background: var(--s24-header) !important;
+    color: var(--s24-text) !important;
+    border-radius: 0 !important;
+}
+/* Keep Play green; Install uses Pink. Disabled state stays visibly muted. */
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA ._1FnJ6dPuknQFQ2RTpKTI16 > ._2AzIX5kl9k6JnxLfR5H4kX {
+    background: var(--s24-accent) !important;
+    color: var(--s24-header) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA ._1FnJ6dPuknQFQ2RTpKTI16._3cI5TXsFX3bvpR-7EBOtxq > ._2AzIX5kl9k6JnxLfR5H4kX {
+    background: #a6e3a1 !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA ._1FnJ6dPuknQFQ2RTpKTI16._1Pb6PMh_3L5p5NzuUz0Pp9 > ._2AzIX5kl9k6JnxLfR5H4kX {
+    background: var(--s24-card) !important;
+    color: var(--s24-muted) !important;
+}
+.DesktopUI ._2iE-78WxX2Pj4GHbq7YJiA ._33cnXIqTRgRr49_FNXIHj6 {
+    color: inherit !important;
+}
