@@ -27,8 +27,8 @@ Mocha Pink. Przeznaczony do świeżej instalacji **CachyOS z GNOME**.
    i zaloguj ponownie; restart uruchomi też wybrany scheduler i usługi.
 
 Skrypt sam używa `sudo` przy zmianach systemowych. **Nie uruchamiaj całego
-restore.sh jako root.** Potrzebny jest internet do repozytoriów/AUR. Źródła
-lokalnego modułu GTK2 są dołączone i mają przypiętą sumę SHA-256.
+restore.sh jako root.** Potrzebny jest internet do repozytoriów/AUR,
+także do budowania `libcanberra-gtk2`.
 
 Listy pakietów instalują aktualne wersje z repozytoriów. `installed-versions.txt`
 jest punktem odniesienia, nie zamrożeniem starego systemu rolling release.
@@ -40,9 +40,15 @@ jest punktem odniesienia, nie zamrożeniem starego systemu rolling release.
 - Zasoby: Catppuccin GTK2/3/Shell, mała nakładka GTK4/libadwaita, Kvantum,
   Tela Pink, MyCursor-GNOME51 i lokalne rozszerzenia GNOME.
 - Fish, Kitty, Fastfetch z obrazkiem, Micro, Vicinae i konfiguracja monospace.
+  Kitty, Fish, Fastfetch, Micro i EasyEffects są na listach repozytoriów;
+  ScopeBuddy oraz `libcanberra-gtk2` są na liście AUR.
 - PipeWire, EasyEffects z presetami/autoloadem oraz OpenTabletDriver
   z ustawieniami i wtyczkami. Nazwy urządzeń audio i geometria tabletu mogą
   wymagać dopasowania po zmianie sprzętu.
+- ScopeBuddy: konfiguracja globalna i profile AppID oraz lokalny interfejs
+  [scopebuddy-gui](https://github.com/rfrench3/scopebuddy-gui) z licencją
+  LGPL-3.0-only i zależnością PySide6. Zachowane ustawienia rozdzielczości
+  Gamescope mogą wymagać dopasowania do monitora.
 - Domyślne aplikacje, niesekretne skrypty pomocnicze i wybrane autostarty.
 - System: natywne nftables, ustawienia sieciowe sysctl, mDNS przez Avahi,
   nss-mdns, lokalne reguły udev i P2DQ/PowerSave w scx_loader.
@@ -55,7 +61,7 @@ osobnymi sposobami instalacji.
 ## Zakresy zamiast pełnego odtworzenia
 
 ```bash
-./restore.sh --packages      # repozytoria, pakiety i moduł GTK2
+./restore.sh --packages      # repozytoria i pakiety, w tym libcanberra-gtk2 z AUR
 ./restore.sh --home          # pliki, motywy, presety i rozszerzenia
 ./restore.sh --gnome         # zapisane ustawienia GNOME w bieżącej sesji
 ./restore.sh --system        # wybrane pliki /etc i usługi
@@ -91,21 +97,43 @@ pełnej skórki około 250 KB. Zwykły GTK4 używa natywnego arkusza GTK i małe
 nakładki kolorów. Qt Widgets korzysta z Kvantum; aplikacje Qt Quick i programy
 z własnym interfejsem mogą mieć dodatkowe, osobne ustawienia wyglądu.
 
-Arch przestał dostarczać moduł dźwięków GTK2 w libcanberra. Recepta
-`local-packages/libcanberra-gtk2-compat/PKGBUILD` buduje wyłącznie wiązania
-GTK2 i moduł, linkując do systemowego libcanberra. Nie zastępuje jego rdzenia,
-backendów, modułu GTK3 ani nagłówka należącego do systemowej paczki.
+Pakiet [libcanberra-gtk2 z AUR](https://aur.archlinux.org/packages/libcanberra-gtk2)
+dostarcza rdzeń libcanberra, backendy, nagłówki i moduły GTK2/GTK3. Zastępuje
+systemowe `libcanberra` oraz dawny lokalny `libcanberra-gtk2-compat`.
+Nie należy instalować ich równolegle ani dodawać `libcanberra` do listy repo.
+Pozostałe aplikacje korzystają z dostarczanych przez paczkę zależności
+`libcanberra` i bibliotek z tym samym SONAME.
 
-Ręczne odtworzenie samej naprawy:
+Ręczna instalacja lub migracja (zaakceptuj usunięcie obu starych pakietów
+w transakcji pacmana, bez `-Rdd` i bez `--overwrite`):
 
 ```bash
-cd local-packages/libcanberra-gtk2-compat
-makepkg --syncdeps --force
-sudo pacman -U libcanberra-gtk2-compat-0.30-2-x86_64.pkg.tar.zst
+paru -S --needed --aur libcanberra-gtk2
+pacman -Q libcanberra-gtk2
+pacman -T libcanberra libcanberra.so=0-64 libcanberra-gtk.so=0-64 libcanberra-gtk3.so=0-64
+pacman -Dk
+pacman -Qkk libcanberra-gtk2
+python scripts/check-gtk2.py
 ```
 
-Źródło: [libcanberra](https://0pointer.net/lennart/projects/libcanberra/),
-LGPL-2.1-or-later. Arch [wyłączył moduł GTK2 w pakiecie](https://gitlab.archlinux.org/archlinux/packaging/packages/libcanberra/-/commit/be7723d344bf0dc7150f031807ff28bf300d2ffa).
+Test GTK uruchom w lokalnej sesji graficznej. Sprawdza załadowanie rzeczywistych
+modułów GTK2 i GTK3 oraz otwarcie kontekstu audio, bez odtwarzania dźwięku.
+
+## Micro, również przez sudo
+
+Motyw `simple` używa tła terminala i koloruje składnię. W Kitty zachowuje
+przezroczystość ustawioną przez `background_opacity`. Konto root ma osobny
+plik ustawień, dlatego sam motyw użytkownika nie zmienia `sudo micro`.
+Etap `--system` ustawia rootowi ten sam wbudowany motyw i włącza składnię.
+Można zastosować tylko tę zmianę:
+
+```bash
+sudo python scripts/configure-root-micro.py
+sudo micro /etc/example.conf
+```
+
+Skrypt zachowuje pozostałe ustawienia roota i tworzy kopię zmienianego pliku
+w `/var/backups/dotfiles/`. Nie udostępnia rootowi wtyczek użytkownika.
 
 ## Co wymaga oddzielnej kopii
 
@@ -157,5 +185,5 @@ Przed zachowaniem nowej wersji obejrzyj `git diff`. Ustawienia zawierające
 klucze API, położenie i historię konsoli GNOME są pomijane; lista pominiętych
 kluczy jest w `gnome/excluded-private-keys.txt`.
 
-Katalog oraz archiwum trzeba przenieść poza formatowany dysk. Repozytorium
-nie zostało wysłane do żadnej zewnętrznej usługi.
+Katalog oraz archiwum trzeba przenieść poza formatowany dysk. Prywatne
+repozytorium kopii: [ajsem1337/dotfiles](https://github.com/ajsem1337/dotfiles).

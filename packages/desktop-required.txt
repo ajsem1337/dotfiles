@@ -22,7 +22,6 @@ kitty
 kvantum
 kvantum-qt5
 libadwaita
-libcanberra
 micro
 networkmanager
 nftables
@@ -32,6 +31,7 @@ paru
 pipewire
 pipewire-pulse
 power-profiles-daemon
+pyside6
 python
 python-gobject
 qt5-base

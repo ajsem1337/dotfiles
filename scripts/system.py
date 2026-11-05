@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 FINGERPRINT = '40DFB630FF42BCFFB047046CF0134EE680CAC571'
@@ -64,6 +65,7 @@ def main():
             run('pacman-key', '--keyserver', 'hkps://keys.openpgp.org', '--recv-keys', FINGERPRINT)
         run('pacman-key', '--lsign-key', FINGERPRINT)
     if args.apply:
+        run(sys.executable, str(ROOT / 'scripts/configure-root-micro.py'))
         for package in ('nftables', 'nss-mdns', 'avahi'):
             run('pacman', '-Q', package, stdout=subprocess.DEVNULL)
         tables = json.loads(subprocess.check_output(['nft', '-j', 'list', 'tables'], text=True))['nftables']

@@ -10,9 +10,6 @@ for name in ('home', 'system', 'gnome', 'packages', 'assets'):
     for p in sorted((root / name).rglob('*')):
         if p.is_file() and not p.is_symlink():
             checksums[str(p.relative_to(root))] = hashlib.sha256(p.read_bytes()).hexdigest()
-for p in (root / 'local-packages/libcanberra-gtk2-compat').iterdir():
-    if p.name in ('PKGBUILD', 'libcanberra-0.30.tar.xz'):
-        checksums[str(p.relative_to(root))] = hashlib.sha256(p.read_bytes()).hexdigest()
 for p in [root / 'restore.sh', root / 'snapshot.json', *sorted((root / 'scripts').glob('*.py'))]:
     checksums[str(p.relative_to(root))] = hashlib.sha256(p.read_bytes()).hexdigest()
 (root / 'checksums.json').write_text(json.dumps(checksums, indent=2) + '\n')

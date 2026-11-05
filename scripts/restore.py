@@ -154,12 +154,9 @@ def install_packages():
             raise RuntimeError('Zainstaluj paru z CachyOS, potem ponów --packages.')
         # Keep the normal PKGBUILD review rather than silently trusting AUR code.
         run(['paru', '-S', '--needed', '--aur', '--', *aur])
-    package_dir = ROOT / 'local-packages/libcanberra-gtk2-compat'
-    run(['makepkg', '--syncdeps', '--force', '--noconfirm'], cwd=package_dir)
-    packages = sorted(package_dir.glob('libcanberra-gtk2-compat-*.pkg.tar.zst'), key=lambda p: p.stat().st_mtime)
-    if not packages:
-        raise RuntimeError('Nie powstał pakiet zgodności GTK2.')
-    run(['sudo', 'pacman', '-U', '--needed', '--', packages[-1]])
+    run(['pacman', '-Q', 'libcanberra-gtk2'])
+    run(['pacman', '-T', 'libcanberra', 'libcanberra.so=0-64',
+         'libcanberra-gtk.so=0-64', 'libcanberra-gtk3.so=0-64'])
 
 def main():
     parser = argparse.ArgumentParser(description='Odtworzenie konfiguracji CachyOS/GNOME. Bez flag pokazuje tylko plan.')

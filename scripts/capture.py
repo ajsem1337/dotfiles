@@ -44,12 +44,15 @@ def main():
         '.config/micro/settings.json', '.config/micro/bindings.json', '.config/micro/colorschemes',
         '.config/vicinae/settings.json', '.config/vicinae/themes', '.config/mimeapps.list',
         '.config/pipewire/pipewire.conf.d', '.config/easyeffectsrc', '.config/easyeffects/db', '.local/share/easyeffects',
+        '.config/scopebuddy/scb.conf', '.config/scopebuddy/AppID',
         '.config/OpenTabletDriver/settings.json', '.config/OpenTabletDriver/Plugins',
         '.config/OpenTabletDriver/Presets', '.config/Equicord/themes',
         '.config/Equicord/settings/quickCss.css', '.config/millennium/quick.css',
         '.config/autostart/Nextcloud.desktop', '.config/autostart/com.github.wwmm.easyeffects.desktop',
         '.local/bin/apply-soft-blur', '.local/bin/game-performance-powersave',
         '.local/bin/scopebuddygui', '.local/bin/set-wine-dark-theme.py',
+        '.local/opt/scopebuddy-gui/src', '.local/opt/scopebuddy-gui/LICENSE.txt',
+        '.local/opt/scopebuddy-gui/README.md',
         '.local/share/applications', '.local/share/backgrounds',
     ]
     for relative in paths:
@@ -129,16 +132,18 @@ end'''
     packages = ROOT / 'packages'
     packages.mkdir(exist_ok=True)
     (packages / 'manual-launchers-not-restored.txt').write_text('\n'.join(sorted(omitted_launchers)) + '\n')
-    local = {'libcanberra-gtk2-compat'}
+    # AUR libcanberra-gtk2 provides the core and both GTK modules. Never
+    # request the conflicting repository package during a later restore.
+    replaced = {'libcanberra', 'libcanberra-gtk2-compat'}
     for name, args in [('repo.txt', ('pacman', '-Qqen')), ('aur.txt', ('pacman', '-Qqem'))]:
-        names = sorted(set(command(*args).splitlines()) - local)
+        names = sorted(set(command(*args).splitlines()) - replaced)
         (packages / name).write_text('\n'.join(names) + '\n')
     required = '''fish kitty fastfetch eza bat zoxide atuin micro gnome-shell gdm
 gnome-control-center gnome-shell-extensions gnome-settings-daemon gnome-keyring
-gtk2 gtk-engine-murrine gtk3 gtk4 libadwaita libcanberra evolution-data-server
+gtk2 gtk-engine-murrine gtk3 gtk4 libadwaita evolution-data-server
 qt5-base qt6-base qt5-wayland-decorations qt6-wayland kvantum kvantum-qt5 nss-mdns avahi nftables
 networkmanager systemd-resolvconf pipewire pipewire-pulse wireplumber
-power-profiles-daemon scx-scheds scx-tools opentabletdriver easyeffects git base-devel
+power-profiles-daemon scx-scheds scx-tools opentabletdriver easyeffects scopebuddy pyside6 git base-devel
 python python-gobject paru flatpak desktop-file-utils adwaita-fonts
 '''.split()
     # Resolve only package names actually available on this installation.
@@ -147,7 +152,8 @@ python python-gobject paru flatpak desktop-file-utils adwaita-fonts
     needed = set(required) & installed
     (packages / 'desktop-required.txt').write_text('\n'.join(sorted(needed & native)) + '\n')
     # Required optional features can themselves be foreign packages (Murrine).
-    aur = set((packages / 'aur.txt').read_text().splitlines()) | (needed - native - local)
+    aur = (set((packages / 'aur.txt').read_text().splitlines()) | (needed - native)) - replaced
+    aur.add('libcanberra-gtk2')
     (packages / 'aur.txt').write_text('\n'.join(sorted(aur)) + '\n')
     (packages / 'installed-versions.txt').write_text(command('pacman', '-Q') + '\n')
     refs = command('flatpak', 'list', '--app', '--columns=application,origin,branch').splitlines()

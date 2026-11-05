@@ -3,7 +3,8 @@
   "format": 1,
   "home_placeholder": "@HOME@",
   "login_shell": "/usr/bin/fish",
-  "home_files": 78,
+  "home_files": 110,
   "gnome_keys": 623,
-  "private_keys_excluded": 2
+  "private_keys_excluded": 2,
+  "updated": "2026-11-05"
 }

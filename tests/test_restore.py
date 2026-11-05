@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 import io
+import json
 import tarfile
 import tempfile
 import unittest
@@ -15,8 +16,30 @@ def load(name):
 
 restore = load('restore')
 system = load('system')
+root_micro = load('configure-root-micro')
 
 class RestoreTests(unittest.TestCase):
+    def test_root_micro_preserves_settings_backups_and_idempotence(self):
+        with tempfile.TemporaryDirectory() as td:
+            base = Path(td)
+            config, backups = base / 'micro', base / 'backups'
+            config.mkdir()
+            settings = config / 'settings.json'
+            previous = '{"colorscheme": "default", "tabsize": 2}\n'
+            settings.write_text(previous)
+            root_micro.configure(config, backups)
+            self.assertEqual(json.loads(settings.read_text()),
+                             {'colorscheme': 'simple', 'syntax': True, 'tabsize': 2})
+            self.assertEqual(next(backups.glob('*/settings.json')).read_text(), previous)
+            changed = settings.stat().st_mtime_ns
+            root_micro.configure(config, backups)
+            self.assertEqual(settings.stat().st_mtime_ns, changed)
+            self.assertEqual(len(list(backups.glob('*/settings.json'))), 1)
+            settings.write_text('invalid json')
+            with self.assertRaises(json.JSONDecodeError):
+                root_micro.configure(config, backups)
+            self.assertEqual(settings.read_text(), 'invalid json')
+
     def fixture(self, root):
         source = root / 'profile'
         (source / 'home/.config').mkdir(parents=True)

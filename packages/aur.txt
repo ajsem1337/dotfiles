@@ -4,6 +4,7 @@ deepfilternet-plus-bin
 equicord-installer-bin
 gnome-rounded-blur
 gtk-engine-murrine
+libcanberra-gtk2
 maplemono-nf
 millennium
 oci-cli

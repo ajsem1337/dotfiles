@@ -116,7 +116,7 @@ double-conversion 3.4.0-1.1
 dtc 1:1.8.1-1.1
 duktape 2.7.0-7.1
 e2fsprogs 1.47.4-1.1
-easyeffects 8.3.0-1.1
+easyeffects 8.3.2-1.1
 edk2-ovmf 202608-1
 efibootmgr 18-4.1
 efivar 39-2.1
@@ -464,8 +464,7 @@ libbsd 0.12.2-2.1
 libbytesize 2.12-3.1
 libcaca 0.99.beta20-7.1
 libcacard 2.8.1-1.1
-libcanberra 1:0.30+r2+gc0620e4-6.1
-libcanberra-gtk2-compat 0.30-2
+libcanberra-gtk2 1:0.30+r2+gc0620e4-6
 libcap 2.78-1.1
 libcap-ng 0.9.6-1.1
 libcbor 0.14.0-1.1
