@@ -23,3 +23,7 @@ Inspiracja: system24, MIT, copyright 2025 refact0r.
 Paleta: Catppuccin Mocha. Adaptacja układu Steama: ajsem dotfiles.
 Font: DM Mono Project Authors, SIL Open Font License 1.1; licencja i źródło
 w `home/.local/share/fonts/DMMono/`.
+
+Wirtualizowana siatka gier zachowuje marginesy, padding i rozmiary sterowane
+przez Steama. Ramka i etykieta biblioteki są na nagłówku, nie na opakowaniu
+całej półki. Nawigacja obsługuje blokowy tytuł zakładki bez zawijania nawiasów.

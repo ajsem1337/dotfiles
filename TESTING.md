@@ -61,6 +61,20 @@ Port stylistyki System24 do Steama:
 - Render sprawdza monospace, etykiety ASCII, obramowania i zachowanie grafik;
   nie stanowi pełnego testu wszystkich ekranów klienta ani benchmarku.
 
-System24: arkusz 9074 B, 32 klasy obecne w plikach klienta. Render potwierdził
+System24: arkusz 9996 B, 35 klas obecne w plikach klienta. Render potwierdził
 DM Mono, etykiety ASCII, ramki, proste krawędzie, brak gradientów tła oraz
 zachowanie grafik. Wariant zainstalowano i wybrano przy zamkniętym Steamie.
+
+Korekta układu System24 po zrzucie działającego klienta:
+
+- Nawiasy nawigacji i blokowy tytuł zakładki są w jednym wierszu flex;
+  aktywna zakładka dziedziczy różowy akcent zamiast natywnego niebieskiego blasku.
+- Ramki kategorii usunięto z kontenerów całych grup. Akcent dotyczy wyłącznie
+  tekstu nazwy kategorii.
+- Usunięto własne marginesy, padding i widoczne obramowanie wirtualizowanej
+  półki. Etykieta i ramka są na nagłówku; kolejne rzędy okładek nie przecinają ramki.
+- Regresję odtworzono z domyślnymi regułami CSS Steama, blokowym elementem
+  tytułu oraz absolutnie pozycjonowanymi rzędami gier. Przy szerokościach
+  960 i 1729 px poprzedni CSS oblewa testy nawigacji, ramek i geometrii półki,
+  a poprawiony przechodzi wszystkie dziewięć kontroli. To test struktury,
+  nie automatyczny test całego działającego klienta.

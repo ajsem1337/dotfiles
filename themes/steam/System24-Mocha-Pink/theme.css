@@ -189,11 +189,20 @@ body.DesktopUI, body.ModalDialogPopup, body.friendsui-container,
 }
 .DesktopUI ._3Z3ohQ8-1NKnCZkbS6fvy {
     justify-content: flex-start !important;
+    padding: 2px 0 0 11px !important;
 }
 .DesktopUI ._7AlhCx3XGzBeIrQaCneUD {
     color: var(--s24-accent) !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    gap: 4px !important;
     border-bottom: 2px solid transparent !important;
-    padding: 4px 10px !important;
+    padding: 0 10px !important;
 }
 .DesktopUI ._7AlhCx3XGzBeIrQaCneUD::before {
     content: "[ ";
@@ -213,18 +222,17 @@ body.DesktopUI, body.ModalDialogPopup, body.friendsui-container,
 .DesktopUI ._1ijTaXJJA5YWl_fW2IxcaT {
     border-right: var(--s24-border) !important;
 }
-/* Insets remain on the shelf itself; the scrolling game list is not reflowed. */
-.DesktopUI .V7RuDNUxhxoBRaiGWbk3B,
-.DesktopUI ._17uEBe5Ri8TMsnfELvs8-N {
-    border: var(--s24-border) !important;
-    margin: var(--s24-gap) !important;
-    padding-top: 22px !important;
-    box-sizing: border-box !important;
-    position: relative !important;
+/* Shelf geometry belongs to Steam's virtualized grid. Never add margins,
+ * padding or visible perimeter borders to the shelf wrapper itself.
+ */
+.DesktopUI .V7RuDNUxhxoBRaiGWbk3B {
+    border-color: transparent !important;
 }
-.DesktopUI .V7RuDNUxhxoBRaiGWbk3B::before,
+.DesktopUI ._17uEBe5Ri8TMsnfELvs8-N {
+    box-shadow: inset 0 0 0 1px var(--s24-line) !important;
+}
 .DesktopUI ._17uEBe5Ri8TMsnfELvs8-N::before {
-    display: block;
+    content: "[ ACTIVITY ]";
     position: absolute;
     top: 0;
     left: 12px;
@@ -232,22 +240,33 @@ body.DesktopUI, body.ModalDialogPopup, body.friendsui-container,
     background: var(--s24-window);
     color: var(--s24-muted);
     font: 500 12px var(--s24-font);
-    letter-spacing: 0;
-    line-height: 1.4;
+    line-height: 1.2;
     pointer-events: none;
-    z-index: 2;
 }
-.DesktopUI .V7RuDNUxhxoBRaiGWbk3B::before {
+.DesktopUI ._23SnllqT_AqZ1C_QHcNQ4Z {
+    border-color: var(--s24-line) !important;
+}
+.DesktopUI ._23SnllqT_AqZ1C_QHcNQ4Z::before {
     content: "[ LIBRARY ]";
+    display: inline-block;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin-right: 12px;
+    color: var(--s24-muted);
+    font: 500 12px var(--s24-font);
+    pointer-events: none;
 }
-.DesktopUI ._17uEBe5Ri8TMsnfELvs8-N::before {
-    content: "[ ACTIVITY ]";
-}
+/* This class wraps a category and its games, not only the title. */
 .DesktopUI ._2sYIghGVXJr6tsQVvcryy8 {
+    border-color: transparent !important;
+}
+.DesktopUI ._2mZ8LlvoUiyeEUtIWuTri {
     color: var(--s24-accent) !important;
-    border-bottom: 1px solid var(--s24-line) !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
+}
+.DesktopUI ._29uten9Yy8q-n7woDEOXVF {
+    color: var(--s24-muted) !important;
 }
 .DesktopUI ._2-O4ZG0KrnSrzISHBKctFQ.sXMOsx8OIRalBMxO9yFY5,
 .DesktopUI ._2-O4ZG0KrnSrzISHBKctFQ._1UBpAXP408Ez_L_mXhW5Q9 {
@@ -267,7 +286,17 @@ body.DesktopUI, body.ModalDialogPopup, body.friendsui-container,
     font-family: var(--s24-font) !important;
     color: var(--s24-title) !important;
 }
-.DesktopUI .V7RuDNUxhxoBRaiGWbk3B:hover,
 .DesktopUI ._17uEBe5Ri8TMsnfELvs8-N:hover {
-    border-color: var(--s24-accent) !important;
+    box-shadow: inset 0 0 0 1px var(--s24-accent) !important;
+}
+
+/* Steam gives the active title its own blue underline and glow. */
+.DesktopUI ._7AlhCx3XGzBeIrQaCneUD ._19axKcqYRuaJ8vdYKYmtTQ {
+    color: inherit !important;
+    font: inherit !important;
+    white-space: nowrap !important;
+    text-shadow: none !important;
+}
+.DesktopUI ._7AlhCx3XGzBeIrQaCneUD ._19axKcqYRuaJ8vdYKYmtTQ::after {
+    display: none !important;
 }
