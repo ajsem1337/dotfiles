@@ -49,3 +49,18 @@ Korekta płaskiego wyglądu Steama: wyzerowane promienie rogów, usunięta
 wewnętrzna ramka oraz jednolite tło Mocha bibliotek, półek i panelu bocznego.
 Render sprawdza również nadpisanie gradientów z oryginalnego CSS klienta
 i zachowanie grafik na kartach.
+
+Port stylistyki System24 do Steama:
+
+- Nowy wariant System24-Mocha-Pink jest domyślny w zapisanym wyborze Millennium;
+  GNOME Mocha Pink pozostaje alternatywą.
+- Font DM Mono Light/Regular/Medium jest dołączony z oficjalnego Google Fonts,
+  razem z OFL 1.1; pliki binarne są objęte sumami kontrolnymi.
+- Kontrola klas obejmuje oba motywy. System24 używa lokalnego CSS, bez JS,
+  importów sieciowych, rozmycia i własnych animacji.
+- Render sprawdza monospace, etykiety ASCII, obramowania i zachowanie grafik;
+  nie stanowi pełnego testu wszystkich ekranów klienta ani benchmarku.
+
+System24: arkusz 9074 B, 32 klasy obecne w plikach klienta. Render potwierdził
+DM Mono, etykiety ASCII, ramki, proste krawędzie, brak gradientów tła oraz
+zachowanie grafik. Wariant zainstalowano i wybrano przy zamkniętym Steamie.

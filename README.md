@@ -56,18 +56,26 @@ nowej instalacji i dobiera zależności wskazanych pakietów.
   wybór włączonego motywu. Pakiet `equicord-installer-bin` dostarcza instalator;
   wstrzyknięcie do wybranego Discorda wykonaj w jego GUI. System24 importuje
   arkusz upstream przez HTTPS, więc do jego pobrania potrzebna jest sieć.
-- **Steam:** pakiet Steam, Millennium i lokalny motyw GNOME Mocha Pink.
+- **Steam:** pakiet Steam, Millennium i lokalny port stylistyki System24 Mocha Pink.
 
 Wygląd Equicorda i Millennium jest **scalany** z plikami ustawień. Dane kont,
 wtyczki, proxy i pozostałe ustawienia pozostają zachowane. Poprzedni plik
 trafia do kopii przed zmianą.
 
-## Steam — GNOME Mocha Pink
+## Steam — System24 Mocha Pink
 
-Motyw w `themes/steam/Gnome-Mocha-Pink/` ma kompaktowy nagłówek, wyśrodkowaną
-nawigację, boczny panel i zawartość z prostymi krawędziami. Używa palety Mocha
-Pink i Adwaita Sans. To jeden lokalny arkusz około 6 KB, bez JavaScriptu,
-importów sieciowych, rozmycia i własnych animacji.
+Domyślny motyw w `themes/steam/System24-Mocha-Pink/` adaptuje stylistykę
+[system24 refact0ra](https://github.com/refact0r/system24) do Steama:
+monospace DM Mono, ramki paneli, etykiety ASCII, tekstowa nawigacja i paleta
+Mocha Pink jak w Equicordzie. Jest to niezależna, nieoficjalna adaptacja
+selektorów i układu. Arkusz Discorda nie jest wstrzykiwany do Steama.
+
+DM Mono jest dołączony lokalnie w `home/.local/share/fonts/DMMono/`,
+z licencją OFL i informacją o źródle. Odtwarzanie aktualizuje cache fontconfig.
+Motyw nie wymaga pobierania CSS ani fontów podczas działania klienta.
+Poprzedni GNOME Mocha Pink pozostaje do wyboru jako prostsza alternatywa.
+Oba warianty mają proste krawędzie i jednolite tła; bez skryptów, rozmycia
+oraz własnych animacji. Okładki gier i grafiki aktualności zostają widoczne.
 
 Nie ładuje Adwaita-for-Steam. Nie kopiuje katalogu instalacji Steama, bibliotek
 gier ani danych konta. Millennium pochodzi z AUR; odtwarzanie tworzy też jego

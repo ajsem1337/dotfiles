@@ -6,23 +6,23 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-THEME = ROOT / 'themes/steam/Gnome-Mocha-Pink'
+THEMES = ROOT / 'themes/steam'
 
 
-def main():
-    skin = json.loads((THEME / 'skin.json').read_text())
-    css = (THEME / 'theme.css').read_text()
+def check_theme(theme):
+    skin = json.loads((theme / 'skin.json').read_text())
+    css = (theme / 'theme.css').read_text()
     assert skin['UseDefaultPatches'] is False
     for patch in skin['Patches']:
         assert 'TargetJs' not in patch
-        path = (THEME / patch['TargetCss']).resolve()
-        assert path.is_relative_to(THEME.resolve()) and path.is_file()
+        path = (theme / patch['TargetCss']).resolve()
+        assert path.is_relative_to(theme.resolve()) and path.is_file()
     assert not re.search(r'@import|https?://|backdrop-filter|:has\(|animation\s*:', css)
     classes = {name for name in re.findall(r'\.([A-Za-z_][A-Za-z0-9_-]*)', css)
                if name.startswith('_') or (len(name) >= 20 and not name.startswith('Dialog'))}
     steam = Path.home() / '.local/share/Steam/steamui'
     if not steam.is_dir():
-        print('OK: local CSS-only Millennium package. Steam is not installed; class check skipped.')
+        print(f'OK: {theme.name}: local CSS-only package. Steam is not installed; class check skipped.')
         return 0
     found = set()
     for path in [*steam.glob('*.js'), *steam.glob('css/*.css')]:
@@ -34,8 +34,12 @@ def main():
     if missing:
         print('Steam layout classes changed: ' + ', '.join(missing), file=sys.stderr)
         return 1
-    print(f'OK: CSS-only theme ({len(css.encode())} bytes), {len(classes)} layout classes found in the installed Steam client.')
+    print(f'OK: {theme.name}: CSS-only ({len(css.encode())} bytes), {len(classes)} Steam classes found.')
     return 0
+
+
+def main():
+    return max((check_theme(theme) for theme in sorted(THEMES.iterdir()) if (theme / 'skin.json').is_file()), default=0)
 
 
 if __name__ == '__main__':

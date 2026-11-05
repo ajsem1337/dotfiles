@@ -1,0 +1,13 @@
+{
+  "name": "System24 for Steam — Mocha Pink",
+  "author": "ajsem",
+  "description": "Unofficial System24-style Steam theme: DM Mono, ASCII panel labels, flat Mocha surfaces and Pink accents.",
+  "version": "1.0.0",
+  "UseDefaultPatches": false,
+  "Patches": [
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "theme.css"
+    }
+  ]
+}

@@ -37,6 +37,7 @@ def main():
         '.config/fish/config.fish', '.config/fish/functions',
         '.config/kitty/kitty.conf', '.config/kitty/current-theme.conf',
         '.config/fastfetch', '.config/fontconfig/conf.d',
+        '.local/share/fonts/DMMono',
         '.config/environment.d/10-qt.conf', '.config/environment.d/30-default-apps.conf',
         '.config/environment.d/40-cursor.conf',
         '.config/gtk-4.0/gtk.css', '.config/Kvantum', '.config/qt5ct', '.config/qt6ct',

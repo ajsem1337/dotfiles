@@ -144,6 +144,8 @@ def restore_home(home, root=ROOT):
             dest.write_text(json.dumps(updated, indent=4) + '\n')
             count += 1
     if home == Path.home().resolve():
+        if (root / 'home/.local/share/fonts').is_dir():
+            run(['fc-cache', '-f', home / '.local/share/fonts'])
         if (root / 'home/.local/share/applications').is_dir():
             subprocess.run(['update-desktop-database', str(home / '.local/share/applications')], check=True)
         if archive_path.is_file():
