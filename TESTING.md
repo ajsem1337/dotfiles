@@ -26,8 +26,8 @@
 - Equicord ma zapisany i włączony System24. Test scalania JSON potwierdza
   zachowanie konta, ustawień wtyczek i zagnieżdżonych opcji, utworzenie kopii,
   idempotencję i zatrzymanie bez nadpisania przy błędnym JSON.
-- Steam: GNOME Mocha Pink to lokalny arkusz 3801 B. `check-steam-theme.py`
-  potwierdził brak skryptów/importów/rozmycia oraz obecność 9 klas układu
+- Steam: GNOME Mocha Pink to lokalny arkusz 5695 B. `check-steam-theme.py`
+  potwierdził brak skryptów/importów/rozmycia oraz obecność 30 klas układu
   w plikach zainstalowanego klienta. Makietę wyrenderowano i obejrzano
   w headless Floorp. To nie jest zrzut klienta ani benchmark płynności.
 - Motyw Steama zastosowano po potwierdzeniu zamknięcia klienta, z kopią
@@ -44,3 +44,8 @@ Wcześniejsza migracja libcanberra z tego samego dnia pozostaje zweryfikowana:
 73 pliki paczki `libcanberra-gtk2`, 0 zmienionych; komplet SONAME, brak błędów
 bazy pacmana; GTK2 i GTK3 ładują moduły, oba konteksty audio zwracają 0.
 Nie uruchamiano ponownie ustawień zapory ani schedulera podczas tej korekty.
+
+Korekta płaskiego wyglądu Steama: wyzerowane promienie rogów, usunięta
+wewnętrzna ramka oraz jednolite tło Mocha bibliotek, półek i panelu bocznego.
+Render sprawdza również nadpisanie gradientów z oryginalnego CSS klienta
+i zachowanie grafik na kartach.

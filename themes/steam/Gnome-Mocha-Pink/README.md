@@ -1,7 +1,7 @@
 # GNOME Mocha Pink
 
 Lokalny motyw Millennium: kompaktowy nagłówek, wyśrodkowana nawigacja,
-boczny panel oraz zawartość biblioteki w zaokrąglonej ramce. Paleta odpowiada
+boczny panel oraz zawartość biblioteki z prostymi krawędziami. Paleta odpowiada
 GTK/Qt/Vicinae: Catppuccin Mocha, akcent Pink, font Adwaita Sans.
 
 Jedna lokalna warstwa CSS, bez JavaScriptu, importów sieciowych, rozmycia
@@ -20,3 +20,7 @@ biblioteki, sklepu i czatu wymagają oceny w działającym kliencie.
 Mniejszy arkusz nie jest pomiarem przyspieszenia całego Steama.
 
 Format motywu: https://docs.steambrew.app/themes/basics/config
+
+Biblioteka, półki, aktualności i panel boczny mają jednolite tło Mocha.
+Usunięto zaokrąglenia motywu oraz domyślne szare gradienty tych powierzchni;
+okładki gier i grafiki aktualności pozostają widoczne.

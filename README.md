@@ -65,8 +65,8 @@ trafia do kopii przed zmianą.
 ## Steam — GNOME Mocha Pink
 
 Motyw w `themes/steam/Gnome-Mocha-Pink/` ma kompaktowy nagłówek, wyśrodkowaną
-nawigację, boczny panel i zawartość w zaokrąglonej ramce. Używa palety Mocha
-Pink i Adwaita Sans. To jeden lokalny arkusz około 4 KB, bez JavaScriptu,
+nawigację, boczny panel i zawartość z prostymi krawędziami. Używa palety Mocha
+Pink i Adwaita Sans. To jeden lokalny arkusz około 6 KB, bez JavaScriptu,
 importów sieciowych, rozmycia i własnych animacji.
 
 Nie ładuje Adwaita-for-Steam. Nie kopiuje katalogu instalacji Steama, bibliotek

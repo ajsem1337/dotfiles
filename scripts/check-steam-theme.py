@@ -18,7 +18,8 @@ def main():
         path = (THEME / patch['TargetCss']).resolve()
         assert path.is_relative_to(THEME.resolve()) and path.is_file()
     assert not re.search(r'@import|https?://|backdrop-filter|:has\(|animation\s*:', css)
-    classes = set(re.findall(r'\.(_[A-Za-z0-9_-]+)', css))
+    classes = {name for name in re.findall(r'\.([A-Za-z_][A-Za-z0-9_-]*)', css)
+               if name.startswith('_') or (len(name) >= 20 and not name.startswith('Dialog'))}
     steam = Path.home() / '.local/share/Steam/steamui'
     if not steam.is_dir():
         print('OK: local CSS-only Millennium package. Steam is not installed; class check skipped.')

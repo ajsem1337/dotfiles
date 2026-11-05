@@ -1,10 +1,13 @@
 {
   "name": "GNOME Mocha Pink",
   "author": "ajsem",
-  "description": "Compact GNOME-style header, inset library, Catppuccin Mocha Pink. Local CSS only.",
-  "version": "1.0.0",
+  "description": "Flat GNOME-style layout, uniform Catppuccin Mocha surfaces and Pink accents. Local CSS only.",
+  "version": "1.1.0",
   "UseDefaultPatches": false,
   "Patches": [
-    {"MatchRegexString": ".*", "TargetCss": "theme.css"}
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "theme.css"
+    }
   ]
 }
