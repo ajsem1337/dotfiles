@@ -1,0 +1,8 @@
+# Dźwięki GTK2/GTK3: ten pakiet zastępuje systemowe libcanberra
+libcanberra-gtk2
+
+# Odszumianie używane przez preset mikrofonu EasyEffects
+deepfilternet-plus-bin
+
+# Profile gier
+scopebuddy

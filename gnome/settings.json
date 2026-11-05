@@ -440,7 +440,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "move-to-workspace-right",
-    "value": "['<Shift><Super>Down']",
+    "value": "['<Super><Shift>Page_Down', '<Super><Shift>KP_Next', '<Super><Shift><Alt>Right', '<Control><Shift><Alt>Right']",
     "schema_dir": null
   },
   {
@@ -458,7 +458,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "move-to-workspace-left",
-    "value": "['<Super><Shift>Up']",
+    "value": "['<Super><Shift>Page_Up', '<Super><Shift>KP_Prior', '<Super><Shift><Alt>Left', '<Control><Shift><Alt>Left']",
     "schema_dir": null
   },
   {
@@ -602,7 +602,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "maximize",
-    "value": "['<Super>Up']",
+    "value": "@as []",
     "schema_dir": null
   },
   {
@@ -650,7 +650,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "move-to-monitor-right",
-    "value": "['<Super><Shift>Right']",
+    "value": "@as []",
     "schema_dir": null
   },
   {
@@ -674,7 +674,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "unmaximize",
-    "value": "['<Super>Down', '<Alt>F5']",
+    "value": "@as []",
     "schema_dir": null
   },
   {
@@ -698,7 +698,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "move-to-workspace-1",
-    "value": "@as []",
+    "value": "['<Super><Shift>Home']",
     "schema_dir": null
   },
   {
@@ -806,7 +806,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "move-to-monitor-left",
-    "value": "['<Super><Shift>Left']",
+    "value": "@as []",
     "schema_dir": null
   },
   {
@@ -878,7 +878,7 @@
   {
     "schema": "org.gnome.desktop.wm.keybindings",
     "key": "move-to-workspace-last",
-    "value": "@as []",
+    "value": "['<Super><Shift>End']",
     "schema_dir": null
   },
   {
@@ -1050,222 +1050,6 @@
     "schema_dir": null
   },
   {
-    "schema": "org.gnome.desktop.sound",
-    "key": "theme-name",
-    "value": "'freedesktop'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.sound",
-    "key": "event-sounds",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.sound",
-    "key": "input-feedback-sounds",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.sound",
-    "key": "allow-volume-above-100-percent",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "custom-accel-config",
-    "value": "{'pointer-step': <1.0>, 'pointer-speeds': <[0.0, 1.0]>}",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "double-click",
-    "value": "400",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "accel-profile",
-    "value": "'flat'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "drag-threshold",
-    "value": "8",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "scroll-wheel-emulation-button-lock",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "speed",
-    "value": "-0.50420168067226889",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "natural-scroll",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "middle-click-emulation",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "left-handed",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.mouse",
-    "key": "scroll-wheel-emulation-button",
-    "value": "0",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "natural-scroll",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "left-handed",
-    "value": "'mouse'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "scroll-speed",
-    "value": "1.0",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "click-method",
-    "value": "'fingers'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "speed",
-    "value": "0.0",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "middle-click-emulation",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "two-finger-scrolling-enabled",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "tap-button-map",
-    "value": "'default'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "disable-while-typing",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "edge-scrolling-enabled",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "tap-and-drag",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "custom-accel-config",
-    "value": "{'pointer-step': <1.0>, 'pointer-speeds': <[0.0, 1.0]>}",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "send-events",
-    "value": "'enabled'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "tap-and-drag-lock",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "disable-while-typing-timeout",
-    "value": "uint32 500",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "tap-to-click",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.touchpad",
-    "key": "accel-profile",
-    "value": "'default'",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.keyboard",
-    "key": "delay",
-    "value": "uint32 500",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.keyboard",
-    "key": "remember-numlock-state",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.keyboard",
-    "key": "numlock-state",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.keyboard",
-    "key": "repeat",
-    "value": "true",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.peripherals.keyboard",
-    "key": "repeat-interval",
-    "value": "uint32 30",
-    "schema_dir": null
-  },
-  {
     "schema": "org.gnome.mutter",
     "key": "overlay-key",
     "value": "''",
@@ -1316,7 +1100,7 @@
   {
     "schema": "org.gnome.mutter",
     "key": "edge-tiling",
-    "value": "true",
+    "value": "false",
     "schema_dir": null
   },
   {
@@ -1338,48 +1122,6 @@
     "schema_dir": null
   },
   {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "xkb-options",
-    "value": "@as []",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "mru-sources",
-    "value": "@a(ss) []",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "show-all-sources",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "current",
-    "value": "uint32 0",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "per-window",
-    "value": "false",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "sources",
-    "value": "[('xkb', 'pl')]",
-    "schema_dir": null
-  },
-  {
-    "schema": "org.gnome.desktop.input-sources",
-    "key": "xkb-model",
-    "value": "'pc105+inet'",
-    "schema_dir": null
-  },
-  {
     "schema": "org.gnome.mutter.keybindings",
     "key": "switch-monitor",
     "value": "['<Super>p', 'XF86Display']",
@@ -1388,13 +1130,13 @@
   {
     "schema": "org.gnome.mutter.keybindings",
     "key": "toggle-tiled-left",
-    "value": "['<Super>Left']",
+    "value": "@as []",
     "schema_dir": null
   },
   {
     "schema": "org.gnome.mutter.keybindings",
     "key": "toggle-tiled-right",
-    "value": "['<Super>Right']",
+    "value": "@as []",
     "schema_dir": null
   },
   {
@@ -1532,13 +1274,13 @@
   {
     "schema": "org.gnome.shell",
     "key": "enabled-extensions",
-    "value": "['user-theme@gnome-shell-extensions.gcampax.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'weatheroclock@CleoMenezesJr.github.io', 'quick-sound-switcher@dustin-hawkins', 'quick-settings-tweaks@qwreey', 'shell-fast-organizer@lsbcodes', 'top-panel-drag@princeola.com', 'top-bar-organizer-plus@shibasishpaul.github.com', 'fullscreen-avoider@noobsai.github.com', 'vicinae@dagimg-dot', 'quick-settings-audio-panel@rayzeq.github.io', 'appindicatorsupport@rgcjonas.gmail.com', 'blur-my-shell@aunetx', 'logomenu@aryan_k']",
+    "value": "['user-theme@gnome-shell-extensions.gcampax.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'weatheroclock@CleoMenezesJr.github.io', 'fullscreen-avoider@noobsai.github.com', 'vicinae@dagimg-dot', 'quick-settings-audio-panel@rayzeq.github.io', 'appindicatorsupport@rgcjonas.gmail.com', 'logomenu@aryan_k', 'blur-my-shell@aunetx', 'tilingshell@ferrarodomenico.com']",
     "schema_dir": null
   },
   {
     "schema": "org.gnome.shell",
     "key": "disabled-extensions",
-    "value": "['status-icons@gnome-shell-extensions.gcampax.github.com', 'tilingshell@ferrarodomenico.com']",
+    "value": "['status-icons@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']",
     "schema_dir": null
   },
   {
@@ -2564,7 +2306,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.appfolder",
     "key": "style-dialogs",
-    "value": "3",
+    "value": "4",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2582,7 +2324,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.appfolder",
     "key": "pipeline",
-    "value": "'pipeline_default'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2594,7 +2336,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell",
     "key": "pipelines",
-    "value": "{'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_69179289847255'>, 'params': <{'unscaled_radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_c2d592ee-4959-43ee-90cc-d557fc156c13': {'name': <'Liquid Glass'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_a480267c-5c8b-4c13-b703-2d98763ea29e'>, 'params': <@a{sv} {}>}>, <{'type': <'refraction'>, 'id': <'effect_8899b991-cb9f-470a-9e86-0317e2cf547a'>, 'params': <{'tint_color': <(0.0, 0.0, 0.0, 1.0)>, 'texture_repeat': <0>}>}>]>}}",
+    "value": "{'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_000000000000'>, 'params': <{'unscaled_radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_liquid_glass': {'name': <'Liquid Glass'>, 'effects': <[<{'type': <'luminosity'>, 'id': <'effect_liquid_glass_luminosity'>, 'params': <{'saturation_multiplicator': <1.1000000000000001>}>}>, <{'type': <'refraction'>, 'id': <'effect_liquid_glass_refraction'>, 'params': <{'tint': <0>}>}>, <{'type': <'noise'>, 'id': <'effect_liquid_glass_noise'>, 'params': <{'noise': <0.10000000000000001>}>}>]>}, 'pipeline_vapor_glass': {'name': <'Vapor Glass'>, 'effects': <[<{'type': <'luminosity'>, 'id': <'effect_vapor_glass_luminosity'>, 'params': <{'saturation_multiplicator': <1.1000000000000001>}>}>, <{'type': <'wave'>, 'id': <'effect_vapor_glass_wave'>}>, <{'type': <'refraction'>, 'id': <'effect_vapor_glass_refraction'>, 'params': <{'tint': <0>}>}>, <{'type': <'noise'>, 'id': <'effect_vapor_glass_noise'>, 'params': <{'noise': <0.10000000000000001>}>}>]>}, 'pipeline_classic_light_background': {'name': <'Classic Light Background'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_classic_light_blur'>, 'params': <{'unscaled_radius': <30>, 'brightness': <0.59999999999999998>}>}>, <{'type': <'color'>, 'id': <'effect_classic_light_color'>, 'params': <{'color': <(1.0, 1.0, 1.0, 0.25)>, 'blend_mode': <17>}>}>]>}, 'pipeline_classic_dark_background': {'name': <'Classic Dark Background'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_classic_dark_blur'>, 'params': <{'unscaled_radius': <30>, 'brightness': <0.59999999999999998>}>}>, <{'type': <'color'>, 'id': <'effect_classic_dark_color'>, 'params': <{'color': <(0.40000000000000002, 0.40000000000000002, 0.40000000000000002, 0.34999999999999998)>, 'blend_mode': <17>}>}>]>}}",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2605,8 +2347,14 @@
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell",
+    "key": "power-saver",
+    "value": "false",
+    "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
+  },
+  {
+    "schema": "org.gnome.shell.extensions.blur-my-shell",
     "key": "settings-version",
-    "value": "7",
+    "value": "8",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2630,7 +2378,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.screenshot",
     "key": "pipeline",
-    "value": "'pipeline_c2d592ee-4959-43ee-90cc-d557fc156c13'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2642,7 +2390,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.coverflow-alt-tab",
     "key": "pipeline",
-    "value": "'pipeline_c2d592ee-4959-43ee-90cc-d557fc156c13'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2654,7 +2402,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.dash-to-dock",
     "key": "style-dash-to-dock",
-    "value": "0",
+    "value": "3",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2678,7 +2426,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.dash-to-dock",
     "key": "pipeline",
-    "value": "'pipeline_default'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2780,7 +2528,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.panel",
     "key": "style-panel",
-    "value": "0",
+    "value": "4",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2797,8 +2545,14 @@
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.panel",
+    "key": "match-theme-in-overview",
+    "value": "true",
+    "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
+  },
+  {
+    "schema": "org.gnome.shell.extensions.blur-my-shell.panel",
     "key": "pipeline",
-    "value": "'pipeline_default'",
+    "value": "'pipeline_liquid_glass'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2828,7 +2582,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.window-list",
     "key": "pipeline",
-    "value": "'pipeline_c2d592ee-4959-43ee-90cc-d557fc156c13'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2840,13 +2594,13 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.lockscreen",
     "key": "pipeline",
-    "value": "'pipeline_c2d592ee-4959-43ee-90cc-d557fc156c13'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "opacity",
-    "value": "240",
+    "value": "215",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2870,13 +2624,13 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "whitelist",
-    "value": "@as []",
+    "value": "['floorp']",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "blacklist",
-    "value": "['Plank', 'com.desktop.ding', 'Conky', 'kitty']",
+    "value": "['Plank', 'Conky']",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2888,19 +2642,19 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "dynamic-opacity",
-    "value": "false",
+    "value": "true",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "corner-radius",
-    "value": "30",
+    "value": "15",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "enable-all",
-    "value": "true",
+    "value": "false",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2924,7 +2678,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "blur-on-overview",
-    "value": "true",
+    "value": "false",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2936,19 +2690,25 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.applications",
     "key": "pipeline",
-    "value": "'pipeline_c2d592ee-4959-43ee-90cc-d557fc156c13'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.dash-to-panel",
     "key": "blur-original-panel",
-    "value": "false",
+    "value": "true",
+    "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
+  },
+  {
+    "schema": "org.gnome.shell.extensions.blur-my-shell.overview",
+    "key": "workspace-corner-radius",
+    "value": "30",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.overview",
     "key": "style-components",
-    "value": "2",
+    "value": "4",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2960,7 +2720,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.overview",
     "key": "pipeline",
-    "value": "'pipeline_default'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2978,13 +2738,13 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.popup",
     "key": "style-popup",
-    "value": "0",
+    "value": "3",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.popup",
     "key": "submenu-corner-radius",
-    "value": "36",
+    "value": "24",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -2996,7 +2756,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.popup",
     "key": "menu-corner-radius",
-    "value": "18",
+    "value": "20",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -3050,7 +2810,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.popup",
     "key": "osd-corner-radius",
-    "value": "18",
+    "value": "28",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -3086,7 +2846,7 @@
   {
     "schema": "org.gnome.shell.extensions.blur-my-shell.popup",
     "key": "pipeline",
-    "value": "'pipeline_default'",
+    "value": "'pipeline_classic_dark_background'",
     "schema_dir": ".local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
   },
   {
@@ -3326,13 +3086,13 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "inner-gaps",
-    "value": "uint32 16",
+    "value": "uint32 10",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "overridden-settings",
-    "value": "'{}'",
+    "value": "\"{\\\"org.gnome.mutter.keybindings\\\":{\\\"toggle-tiled-right\\\":\\\"['<Super>Right']\\\",\\\"toggle-tiled-left\\\":\\\"['<Super>Left']\\\"},\\\"org.gnome.desktop.wm.keybindings\\\":{\\\"maximize\\\":\\\"['<Super>Up']\\\",\\\"unmaximize\\\":\\\"['<Super>Down', '<Alt>F5']\\\"},\\\"org.gnome.mutter\\\":{\\\"edge-tiling\\\":\\\"true\\\"}}\"",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3380,13 +3140,13 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "tiling-system-activation-key",
-    "value": "@as []",
+    "value": "['1']",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "enable-window-border",
-    "value": "false",
+    "value": "true",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3398,7 +3158,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "enable-smart-window-border-radius",
-    "value": "true",
+    "value": "false",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3416,7 +3176,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "snap-assistant-animation-time",
-    "value": "uint32 180",
+    "value": "uint32 0",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3434,7 +3194,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "span-multiple-tiles-activation-key",
-    "value": "@as []",
+    "value": "['1']",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3464,7 +3224,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "enable-tiling-system",
-    "value": "true",
+    "value": "false",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3476,7 +3236,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "selected-layouts",
-    "value": "[['13997526', '13997526'], ['Layout 1', 'Layout 4'], ['Layout 1', 'Layout 4'], ['Layout 1', 'Layout 4']]",
+    "value": "[['13997526', '13997526', '13997526'], ['Layout 1', 'Layout 4', '13997526'], ['Layout 1', 'Layout 4', '13997526'], ['Layout 1', 'Layout 4', '13997526']]",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3494,7 +3254,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "snap-assist-sync-layout",
-    "value": "false",
+    "value": "true",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3506,7 +3266,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "tiling-system-deactivation-key",
-    "value": "@as []",
+    "value": "['-1']",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3542,7 +3302,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "outer-gaps",
-    "value": "uint32 8",
+    "value": "uint32 10",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3608,7 +3368,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "tile-preview-animation-time",
-    "value": "uint32 100",
+    "value": "uint32 0",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {
@@ -3638,7 +3398,7 @@
   {
     "schema": "org.gnome.shell.extensions.tilingshell",
     "key": "enable-span-multiple-tiles",
-    "value": "true",
+    "value": "false",
     "schema_dir": ".local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com/schemas"
   },
   {

@@ -6,7 +6,7 @@ import json
 
 root = Path(__file__).resolve().parents[1]
 checksums = {}
-for name in ('home', 'system', 'gnome', 'packages', 'assets'):
+for name in ('home', 'system', 'gnome', 'packages', 'assets', 'themes'):
     for p in sorted((root / name).rglob('*')):
         if p.is_file() and not p.is_symlink():
             checksums[str(p.relative_to(root))] = hashlib.sha256(p.read_bytes()).hexdigest()

@@ -1,4 +1,4 @@
-# Narzędzia odtwarzania i budowania AUR
+# Odtwarzanie konfiguracji i budowanie AUR
 base-devel
 git
 paru
@@ -6,7 +6,7 @@ python
 python-gobject
 desktop-file-utils
 
-# GTK2/3/4, libadwaita i schematy zapisanych rozszerzeń GNOME
+# GTK2/3/4, libadwaita i rozszerzenia GNOME
 gtk2
 gtk3
 gtk4
@@ -14,7 +14,7 @@ libadwaita
 gnome-shell-extensions
 libgweather-4
 
-# Qt5/Qt6: integracja GTK3, konfiguratory i styl Kvantum
+# Qt5/Qt6, integracja GTK3 i styl Kvantum
 qt5-base
 qt6-base
 qt6-wayland
@@ -23,30 +23,17 @@ qt6ct
 kvantum
 kvantum-qt5
 
-# Fonty używane przez GNOME i Qt; Maple Mono NF jest na liście AUR
+# Fonty GNOME/Qt oraz Vicinae; Maple Mono NF dla Kitty jest w AUR
 adwaita-fonts
+ttf-firacode-nerd
 
-# Terminal, powłoka i edytor z zapisanymi ustawieniami
+# Wygląd terminala, powłoki i edytora
 kitty
 fish
 fastfetch
 micro
 bat
 
-# PipeWire i efekty używane przez zachowane presety EasyEffects
-pipewire
-pipewire-pulse
-wireplumber
-easyeffects
-calf
-lsp-plugins-lv2
-
-# ScopeBuddy, lokalne GUI i skrypt przywracania profilu zasilania
-gamescope
-pyside6
-cachyos-settings
-power-profiles-daemon
-
-# Ustawienia tabletu oraz widoczność motywów w Flatpaku
-opentabletdriver
+# Steam z lokalnym motywem Millennium i motywy aplikacji Flatpak
+steam
 flatpak

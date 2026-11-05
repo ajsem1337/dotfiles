@@ -1,0 +1,15 @@
+{
+  "path": ".config/Equicord/settings/settings.json",
+  "merge": {
+    "enabledThemes": [
+      "system24-catppuccin-mocha.theme.css"
+    ],
+    "useQuickCss": false,
+    "frameless": true,
+    "transparent": false,
+    "nativeTitleBar": false,
+    "winNativeTitleBar": false,
+    "noRoundCorners": false,
+    "mainWindowFrameless": true
+  }
+}

@@ -1,169 +1,198 @@
-# CachyOS GNOME — przepis na mój pulpit
+# CachyOS GNOME — spójny wygląd i osobny profil systemowy
 
-Odtwarza Catppuccin Mocha Pink, ustawienia GNOME i skonfigurowane aplikacje
-na gotowej instalacji **CachyOS GNOME**. Pakiety są dobrane do zapisanych
-ustawień. Nie ma tu spisu wszystkich pakietów ani ich wersji z komputera.
+Bazą jest gotowa instalacja **CachyOS GNOME**. Repo ma dwa zakresy:
 
-## Po świeżej instalacji CachyOS GNOME
-
-1. Skonfiguruj użytkownika, dyski, rozruch, sterowniki i internet w instalatorze.
-2. Pobierz to prywatne repozytorium lub przenieś jego kopię. Otwórz terminal
-   jako zwykły użytkownik w lokalnej sesji GNOME.
-3. Uruchom:
-
-   ```bash
-   cd ~/dotfiles
-   ./restore.sh --plan
-   ./restore.sh --all
-   ```
-
-4. Przejrzyj pytania pacmana i recepty AUR. Wyloguj się i zaloguj ponownie.
-
-`--all` instaluje zależności konfiguracji, kopiuje pliki, ustawia GNOME
-oraz motyw Micro dla roota. Skrypt sam wywołuje `sudo` w potrzebnych miejscach;
-nie uruchamiaj całego `restore.sh` jako root. Potrzebuje internetu do repo i AUR.
-
-## Co jest potrzebne i po co
-
-| Element konfiguracji | Pakiety i zasoby |
+| Zakres | Co odtwarza |
 | --- | --- |
-| GTK2/3/4 i libadwaita | `gtk2`, `gtk3`, `gtk4`, `libadwaita`, `gtk-engine-murrine`, `libcanberra-gtk2` |
-| Qt5/Qt6 | `qt5-base`, `qt6-base`, `qt6-wayland`, `qt5ct`, `qt6ct`, `kvantum`, `kvantum-qt5`, dekoracje Waylanda z listy AUR |
-| Motyw, ikony, kursor i fonty | Catppuccin, Tela Pink i MyCursor w `assets/desktop.tar.gz`; `adwaita-fonts` i `maplemono-nf` |
-| GNOME i rozszerzenia | Gotowa sesja CachyOS GNOME, `gnome-shell-extensions`, `libgweather-4`; lokalne rozszerzenia są w archiwum |
-| Terminal, powłoka i edytor | `kitty`, `fish`, `fastfetch`, `micro`, `bat`; motywy i ustawienia są w `home/` |
-| Audio | PipeWire, WirePlumber, `easyeffects`, `calf`, `lsp-plugins-lv2`, `deepfilternet-plus-bin`; presety i autoload w `home/` |
-| ScopeBuddy i lokalne GUI | `scopebuddy`, `gamescope`, `pyside6`; zapisane profile oraz źródła GUI z licencją LGPL-3.0-only |
-| Pozostałe zapisane ustawienia | `vicinae-bin`, `opentabletdriver`, `flatpak`; profil zasilania używa `power-profiles-daemon` i `game-performance` z `cachyos-settings` |
-| Uruchomienie odtwarzania | Python, PyGObject, `desktop-file-utils`, Git, `base-devel` i `paru` |
+| Wygląd — `--all` | GTK2/3/4, libadwaita, Qt5/6, Kvantum, ikony, kursor, fonty, tapetę, GNOME i rozszerzenia, Kitty/Fish/Fastfetch/Micro, Vicinae, Equicord System24 oraz Steam Millennium |
+| System — osobne `--system` | Zapora, sieć, scheduler, dźwięki GTK, PipeWire, całe EasyEffects z presetami/autoloadem, ScopeBuddy i tablet |
 
-Dokładny przepis, z komentarzami do każdej grupy, znajduje się w:
+Nie zapisujemy pełnych spisów pakietów ani wersji. Listy w `packages/` są
+ręcznym przepisem na zależności tych konfiguracji. Partycje, rozruch, sterowniki,
+konta i dostęp do internetu konfiguruje instalator systemu.
 
-- [`packages/repo.txt`](packages/repo.txt) — pakiety z repozytoriów;
-- [`packages/aur.txt`](packages/aur.txt) — pakiety budowane z AUR.
+## Odtworzenie wyglądu
 
-Pacman dobiera ich zależności. Nie dopisujemy ręcznie wszystkich bibliotek
-z systemu. Nie odtwarzamy listy kerneli, firmware, sterowników, przeglądarek,
-gier, pakietów deweloperskich ani wszystkich aplikacji AUR i Flatpak.
-`pacman -Syu` zachowuje spójność wersji podczas instalowania wskazanych pakietów.
-
-Przepis używa repozytoriów skonfigurowanych na nowej instalacji CachyOS.
-Nie importuje starego `pacman.conf` i nie dodaje automatycznie Omarchy.
-Listy są utrzymywane ręcznie; `capture.py` zbiera konfigurację i nie zastępuje
-ich wynikiem `pacman -Q`.
-
-Fish używa `bat`, a pozostałe opcjonalne dodatki w jego pliku sprawdza przez
-`type -q`. Nie trzeba instalować `eza`, `zoxide` ani `atuin`, aby odtworzyć
-obecnie działający profil — nie były zainstalowane podczas tego sprawdzenia.
-
-## Poszczególne kroki
+Zamknij Steama i aplikacje, których ustawienia zamierzasz odtworzyć.
+Uruchom jako użytkownik zalogowany do lokalnej sesji GNOME:
 
 ```bash
-./restore.sh --packages      # tylko pakiety z przepisu repo/AUR
-./restore.sh --home          # pliki, motywy, presety i rozszerzenia
-./restore.sh --gnome         # ustawienia GNOME w bieżącej sesji
-./restore.sh --root-micro    # wygląd i składnia w sudo micro
+cd ~/dotfiles
+./restore.sh --all --plan
+./restore.sh --all
 ```
 
-Przed nadpisaniem pliki użytkownika trafiają do
-`~/.local/state/dotfiles-backups/`. Powtórne `--home` pomija pliki o tej samej
-treści i uprawnieniach. `--gnome` zapisuje poprzednie wartości w
-`gnome-before.json` w katalogu kopii. Można je przywrócić przez:
+Skrypt instaluje pakiety z `packages/repo.txt` i `packages/aur.txt`, kopiuje
+konfigurację oraz zasoby, ustawia GNOME i wygląd Micro roota. Sam wywołuje
+`sudo` w potrzebnych miejscach. Nie uruchamiaj całego skryptu jako root.
+Przejrzyj pytania pacmana i recepty AUR, a na końcu wyloguj się i zaloguj ponownie.
+
+Osobne kroki:
 
 ```bash
-python scripts/revert-gnome.py /ścieżka/do/gnome-before.json
+./restore.sh --packages      # zależności wyglądu
+./restore.sh --home          # pliki, zasoby i motywy aplikacji
+./restore.sh --gnome         # ustawienia GNOME, rozszerzenia i skróty
+./restore.sh --root-micro    # motyw simple i składnia w sudo micro
 ```
 
-Profil ustawia Fish jako powłokę logowania; `chsh` może poprosić o hasło.
-Presety audio, nazwy urządzeń, geometria tabletu i rozdzielczości w profilach
-ScopeBuddy mogą wymagać dopasowania do nowego sprzętu.
+`--all` nie stosuje ustawień zapory, sieci, schedulera ani audio. Nie importuje
+starego `pacman.conf` i nie dodaje automatycznie Omarchy. Pacman używa źródeł
+nowej instalacji i dobiera zależności wskazanych pakietów.
 
-Bezpieczna próba odtworzenia plików do pustego katalogu:
+## Co składa się na wygląd
+
+- **GTK2/3:** Catppuccin-Pink-Dark i silnik Murrine.
+- **GTK4/libadwaita:** mała nakładka CSS z kolorami i akcentami.
+- **Qt5/Qt6:** integracja GTK3, Kvantum Mocha Pink, konfiguracje qt5ct/qt6ct
+  oraz dekoracje Qt na Waylandzie.
+- **Zasoby GNOME:** ikony Tela Pink, kursor MyCursor-GNOME51, tapeta,
+  Adwaita Sans/Mono i ustawienia fontconfig.
+- **Terminal:** Kitty z Maple Mono NF, Fish z promptem, Fastfetch z obrazkiem
+  oraz Micro z tłem terminala i kolorowaniem składni.
+- **Vicinae:** motyw Mocha Pink, konfiguracja launchera, FiraCode Nerd Font
+  i skróty wywołujące launcher oraz schowek.
+- **Equicord:** System24 Catppuccin Mocha z różowym akcentem. Zapisujemy także
+  wybór włączonego motywu. Pakiet `equicord-installer-bin` dostarcza instalator;
+  wstrzyknięcie do wybranego Discorda wykonaj w jego GUI. System24 importuje
+  arkusz upstream przez HTTPS, więc do jego pobrania potrzebna jest sieć.
+- **Steam:** pakiet Steam, Millennium i lokalny motyw GNOME Mocha Pink.
+
+Wygląd Equicorda i Millennium jest **scalany** z plikami ustawień. Dane kont,
+wtyczki, proxy i pozostałe ustawienia pozostają zachowane. Poprzedni plik
+trafia do kopii przed zmianą.
+
+## Steam — GNOME Mocha Pink
+
+Motyw w `themes/steam/Gnome-Mocha-Pink/` ma kompaktowy nagłówek, wyśrodkowaną
+nawigację, boczny panel i zawartość w zaokrąglonej ramce. Używa palety Mocha
+Pink i Adwaita Sans. To jeden lokalny arkusz około 4 KB, bez JavaScriptu,
+importów sieciowych, rozmycia i własnych animacji.
+
+Nie ładuje Adwaita-for-Steam. Nie kopiuje katalogu instalacji Steama, bibliotek
+gier ani danych konta. Millennium pochodzi z AUR; odtwarzanie tworzy też jego
+dwa standardowe linki bootstrapu w katalogach użytkownika, jeżeli biblioteki
+pakietu są zainstalowane. Dzięki temu nie zależy od uruchomienia Steama przed
+instalowaniem Millennium.
+
+Steam musi być zamknięty podczas `--home`; skrypt sprawdza to przed zmianami.
+Po aktualizacji klienta można sprawdzić klasy używane przez układ:
 
 ```bash
-./restore.sh --home --target-home /tmp/proba-dotfiles
+python scripts/check-steam-theme.py
 ```
 
-## Opcjonalne ustawienia systemowe
+Motyw ma sprawdzoną strukturę, obecność klas w zainstalowanym kliencie i render
+na reprezentatywnej makiecie. Nie jest to benchmark ani pełny test wszystkich
+widoków działającego Steama. Płynność biblioteki, sklepu i czatu trzeba ocenić
+w kliencie po uruchomieniu nowego motywu.
 
-Dawne ustawienia nftables, mDNS, sysctl, udev i schedulera pozostają osobnym
-krokiem. **`--all` ich nie stosuje i nie instaluje ich pakietów.** Jeśli chcesz
-je również odtworzyć, przejrzyj `system/` i [`packages/system.txt`](packages/system.txt),
-a potem uruchom lokalnie:
+## Rozszerzenia GNOME, tiling i skróty
+
+`gnome/extensions.json` opisuje obecne rozszerzenia, wersje i stan włączenia.
+Eksport z 2026-11-05 zawiera 10 rozszerzeń, w tym Tiling Shell 18.0. Pięć starych
+wpisów, których plików nie ma w systemie, pominięto w liście do odtworzenia.
+
+Zapisujemy bieżące układy tilingu, autotiling, odstępy, wygląd okien i skróty.
+Tiling Shell przejmuje **Super + strzałki**. Odpowiedniki GNOME są wyłączone,
+a rozszerzenie zachowuje własny zapis ustawień do przywrócenia po wyłączeniu.
+Ustawienia rozszerzeń i skróty GNOME są odtwarzane przed listą włączenia rozszerzeń.
 
 ```bash
+python scripts/check-keybindings.py          # sprawdź zapisany profil
+python scripts/check-keybindings.py --live   # sprawdź bieżącą sesję
+```
+
+Kontrola porównuje skróty GNOME, włączonych rozszerzeń i własnych poleceń,
+rozpoznaje aliasy Control/Ctrl/Primary oraz zastępowanie skrótów multimedialnych.
+`--gnome` wykonuje ją przed zmianami i zatrzymuje się przy wykryciu kolizji.
+Eksport nie zawiera historii konsoli ani wartości kluczy z danymi prywatnymi.
+
+## Po co zostały trzy pliki .desktop
+
+- `vicinae-toggle.desktop` i `vicinae-clipboard.desktop` są ukrytymi poleceniami
+  dla skrótów GNOME; nie dublują pozycji w menu.
+- `micro.desktop` otwiera Micro w Kitty po wybraniu pliku z menedżera plików.
+
+Usunięto kopie launcherów Code, przeglądarek, poczty i narzędzi systemowych,
+cache menu, skojarzenia MIME oraz niezwiązany z wyglądem autostart Nextcloud.
+Launcher lokalnego GUI ScopeBuddy znajduje się w `system/home/` razem z GUI.
+Standardowe pliki `.bashrc` i `.bash_profile` nie są częścią tego profilu.
+
+## Zasoby wyglądu i aktualność archiwum
+
+`assets/appearance.tar.gz` zawiera wyłącznie motyw GTK, ikony, kursor i kod
+lokalnych rozszerzeń GNOME. To nie jest spakowane repozytorium dotfiles.
+Zastąpiło stare `desktop.tar.gz` i zostało ponownie zebrane z działającej
+konfiguracji. `assets/manifest.json` podaje datę, katalogi i liczbę plików.
+
+Archiwum ogranicza liczbę drobnych plików ikon w Git. Ustawienia rozszerzeń
+są osobno w czytelnym `gnome/settings.json`, a źródła motywu Steama w `themes/`.
+
+## Osobny profil systemowy i audio
+
+Po przejrzeniu `system/`, `packages/system.txt` oraz `packages/system-aur.txt`:
+
+```bash
+./restore.sh --packages --system --plan
 ./restore.sh --packages --system
 ```
 
-Ten krok zmienia zaporę i usługi, tworząc kopie w `/var/backups/dotfiles-*`.
-Nie instaluje kernela ani sterowników. Zapisane `pacman.conf` i `nsswitch.conf`
-są materiałem referencyjnym, nie plikami do podmiany w całości.
+Ten krok instaluje tylko zależności profilu systemowego, odtwarza pliki z
+`system/home/`, ustawienia dźwięku i urządzeń z `system/gnome/settings.json`,
+a następnie stosuje zapisane pliki `/etc`, zaporę i usługi. Wykonuj go lokalnie.
+Presety audio, autoload, geometria tabletu i rozdzielczości ScopeBuddy mogą
+wymagać dopasowania po zmianie sprzętu. Oba zakresy naraz odtworzysz przez
+`./restore.sh --all --system`.
 
-## GTK, Qt i dźwięki
+`game-performance` pochodzi z bazowego CachyOS. Nie kopiujemy go ani nie
+instalujemy ponownie `cachyos-settings`. Profile ScopeBuddy używają istniejącego
+`/usr/bin/game-performance`; własny wrapper powersave usunięto z przepisu.
 
-GTK4/libadwaita dostają kolory i akcenty przez małą nakładkę CSS.
-GTK2/3 korzystają z dołączonego Catppuccin, a Qt Widgets z Kvantum.
-`QT_QPA_PLATFORMTHEME=gtk3` zapewnia integrację Qt z GNOME;
-`qt5ct` i `qt6ct` zachowujemy razem z ich konfiguracją.
-
-[libcanberra-gtk2 z AUR](https://aur.archlinux.org/packages/libcanberra-gtk2)
-dostarcza rdzeń, backendy, nagłówki oraz moduły GTK2 i GTK3. Zastępuje
-systemowe `libcanberra` i dawny lokalny `libcanberra-gtk2-compat`.
-Nie instaluj ich równolegle. Ręczna instalacja lub migracja:
+Dźwięki GTK2/GTK3 zapewnia `libcanberra-gtk2` z AUR, który zastępuje systemowe
+`libcanberra`. Jest wyłącznie na liście systemowej. Kontrola modułów w sesji GNOME:
 
 ```bash
-paru -S --needed --aur libcanberra-gtk2
 pacman -T libcanberra libcanberra.so=0-64 libcanberra-gtk.so=0-64 libcanberra-gtk3.so=0-64
 pacman -Dk
 pacman -Qkk libcanberra-gtk2
 python scripts/check-gtk2.py
 ```
 
-Zaakceptuj zastąpienie starych pakietów w transakcji pacmana. Test GTK wymaga
-sesji graficznej; ładuje oba moduły i otwiera kontekst audio bez grania dźwięku.
+## Kopie i sprawdzanie
 
-## Micro, również przez sudo
-
-Motyw `simple` używa tła terminala i koloruje składnię. W Kitty zachowuje
-przezroczystość z `background_opacity`. Root ma osobną konfigurację, dlatego
-`--all` i `--root-micro` ustawiają mu ten sam wbudowany motyw oraz `syntax: true`.
-Można też uruchomić bezpośrednio:
+Zmieniane pliki użytkownika trafiają do `~/.local/state/dotfiles-backups/`,
+a pliki systemowe do `/var/backups/dotfiles-*`. Drugie odtworzenie pomija
+identyczne pliki. Stan GNOME można przywrócić z zapisanej kopii:
 
 ```bash
-sudo python scripts/configure-root-micro.py
+python scripts/revert-gnome.py /ścieżka/do/gnome-before.json
 ```
 
-Skrypt zachowuje inne ustawienia roota i kopię zmienianego pliku w
-`/var/backups/dotfiles/`. Nie uruchamia wtyczek użytkownika jako root.
+Próba plików wyglądu w pustym katalogu, bez zmieniania sesji i pakietów:
 
-## Ustawienia pozostałych aplikacji
+```bash
+./restore.sh --home --target-home /tmp/proba-dotfiles
+```
 
-Zapisane CSS Equicorda i Millennium, skróty menu, skojarzenia plików oraz
-autostart Nextcloud są dodatkami dla aplikacji, które zainstalujesz osobno.
-Nie powodują instalacji Discorda, Steama, Nextcloud, przeglądarek ani edytorów.
-Skróty i skojarzenia zaczną działać po zainstalowaniu odpowiednich programów.
-Lokalny [scopebuddy-gui](https://github.com/rfrench3/scopebuddy-gui) ma dołączone
-źródła i licencję, więc jego zapisany launcher ma komplet plików do startu.
-
-Kopie kont, haseł, tokenów, SSH/GPG/AWS/OCI, keyringów, profili przeglądarek,
-historii, gier, Wine i dokumentów trzeba wykonać osobno. To samo dotyczy
-AppImage i ręcznie pobranych instalatorów Flatpak.
-Nie kopiujemy `fstab`, UUID, machine-id, bootloadera ani list mirrorów.
-
-## Aktualizacja i sprawdzenie przepisu
+Aktualizacja na własnym pulpicie:
 
 ```bash
 python scripts/capture.py
+python scripts/check-keybindings.py
+python scripts/check-steam-theme.py
 python scripts/seal.py
 python scripts/verify.py
 python -m unittest discover -s tests -v
 ```
 
-`capture.py` zbiera pliki z jawnej listy i ustawienia GNOME. Pakiet dodaj do
-`repo.txt` lub `aur.txt` tylko wtedy, gdy jest potrzebny zapisanej konfiguracji;
-komentarz powinien wyjaśniać jego rolę. Nie generujemy pełnych spisów pakietów,
-wersji ani zainstalowanych Flatpaków. `verify.py` sprawdza sumy, przenośność
-ścieżek, archiwum i wzorce sekretów. Przed zachowaniem zmian obejrzyj `git diff`.
+`capture.py` zbiera wyłącznie wskazane pliki i ustawienia, odświeża archiwum
+oraz listę rozszerzeń. Listy pakietów utrzymujemy ręcznie; każdy pakiet ma
+mieć rolę w wyglądzie albo opcjonalnym profilu systemowym. Przed wysłaniem
+obejrzyj `git diff`.
+
+Hasła, klucze, konta, keyringi, profile przeglądarek, historia, gry, Wine,
+dokumenty i instalatory wymagają oddzielnej kopii. Kopię tego repo również
+przenieś poza dysk przeznaczony do formatowania.
 
 Prywatne repozytorium: [ajsem1337/dotfiles](https://github.com/ajsem1337/dotfiles).
-Kopię przenieś poza dysk, który zamierzasz formatować.

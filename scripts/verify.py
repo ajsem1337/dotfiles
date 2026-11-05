@@ -25,7 +25,7 @@ def main():
             p = ROOT / relative
             if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != expected:
                 errors.append('Checksum: ' + relative)
-    paths = list((ROOT / 'home').rglob('*')) + list((ROOT / 'system').rglob('*')) + list((ROOT / 'gnome').rglob('*'))
+    paths = [p for name in ('home', 'system', 'gnome', 'themes') for p in (ROOT / name).rglob('*')]
     for p in paths:
         if any(part in FORBIDDEN for part in p.relative_to(ROOT).parts):
             errors.append('Forbidden path: ' + str(p.relative_to(ROOT)))
@@ -38,7 +38,7 @@ def main():
                 errors.append('Possible credential: ' + str(p.relative_to(ROOT)))
             if '/home/ajsem' in text:
                 errors.append('Non-portable home: ' + str(p.relative_to(ROOT)))
-    with tarfile.open(ROOT / 'assets/desktop.tar.gz') as archive:
+    with tarfile.open(ROOT / 'assets/appearance.tar.gz') as archive:
         for item in archive:
             name = PurePosixPath(item.name)
             if name.is_absolute() or '..' in name.parts or any(part in FORBIDDEN or part == '.git' for part in name.parts):

@@ -1,9 +1,31 @@
-# Wyłącznie dla opcjonalnego: ./restore.sh --packages --system
-# Nie jest częścią zwykłego ./restore.sh --all.
-# Zależności zapisanych plików /etc i usług; bez kerneli, sterowników i rozruchu.
+# Opcjonalny profil: ./restore.sh --packages --system
+# Narzędzia potrzebne również przy odtwarzaniu samego profilu systemowego
+base-devel
+git
+paru
+python
+python-gobject
+desktop-file-utils
+
+# Zapora, sieć i scheduler
 avahi
 nftables
 nss-mdns
 networkmanager
 scx-scheds
 scx-tools
+
+# Audio i wtyczki używane przez zapisane presety EasyEffects
+pipewire
+pipewire-pulse
+wireplumber
+easyeffects
+calf
+lsp-plugins-lv2
+sound-theme-freedesktop
+
+# ScopeBuddy, GUI i tablet
+gamescope
+pyside6
+opentabletdriver
+power-profiles-daemon

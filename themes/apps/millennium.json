@@ -1,0 +1,11 @@
+{
+  "path": ".config/millennium/config.json",
+  "merge": {
+    "general": {"injectCSS": true},
+    "themes": {
+      "activeTheme": "Gnome-Mocha-Pink",
+      "allowedStyles": true,
+      "allowedScripts": false
+    }
+  }
+}

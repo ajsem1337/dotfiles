@@ -1,17 +1,16 @@
-# Silnik motywu GTK2 i moduły dźwięku GTK2/GTK3
+# Silnik motywu GTK2
 gtk-engine-murrine
-libcanberra-gtk2
 
 # Font terminala Kitty
 maplemono-nf
 
-# Zachowane dekoracje Qt na Waylandzie
+# Dekoracje Qt na Waylandzie
 qt5-wayland-decorations
 qadwaitadecorations-qt6
 
-# Efekt DeepFilterNet z presetu mikrofonu EasyEffects
-deepfilternet-plus-bin
-
-# Zapisana konfiguracja launchera i ScopeBuddy
+# Launcher i motyw klienta Steam
 vicinae-bin
-scopebuddy
+millennium
+
+# Instalator Equicorda; samo wstrzyknięcie do Discorda wykonuje się w jego GUI
+equicord-installer-bin

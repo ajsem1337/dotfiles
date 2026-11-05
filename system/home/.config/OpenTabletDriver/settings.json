@@ -65,6 +65,10 @@
           "Path": "TemporalResampler",
           "Settings": [
             {
+              "Property": "frameShift",
+              "Value": 0.0
+            },
+            {
               "Property": "reverseSmoothing",
               "Value": 1.0
             },
@@ -81,16 +85,12 @@
               "Value": 1000.0
             },
             {
-              "Property": "frameShift",
-              "Value": 0.0
+              "Property": "followRadius",
+              "Value": 1.0
             },
             {
               "Property": "latency",
-              "Value": 8.0
-            },
-            {
-              "Property": "followRadius",
-              "Value": 0.7
+              "Value": 7.0
             }
           ],
           "Enable": true

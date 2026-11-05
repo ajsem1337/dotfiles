@@ -1,81 +1,46 @@
-# Sprawdzenie kopii — 2026-11-05
+# Sprawdzenie konfiguracji — 2026-11-05
 
-## Przepis na konfigurację
+- Przepis wyglądu: 28 pakietów repo i 7 AUR. Opcjonalny system: 23 repo
+  i 3 AUR. `pacman -T` potwierdził obecność zależności, a nazwy repo są
+  dostępne w skonfigurowanych źródłach. Nie instalowano pełnego zestawu
+  na świeżej maszynie.
+- Audio, wszystkie zapisane pliki EasyEffects/PipeWire, dźwięki GNOME,
+  ScopeBuddy i tablet przeniesiono do `system/`. `--all` nie wywołuje
+  odtwarzania tej części; test sprawdza również rozdział pakietów AUR.
+- Z `home/` usunięto standardowe pliki Bash, puste Millennium Quick CSS,
+  skojarzenia MIME, cache i launchery niezwiązanych programów. Zostały
+  trzy uzasadnione pliki desktop: dwa dla skrótów Vicinae i Micro w Kitty.
+- `assets/appearance.tar.gz` zebrano ponownie z działającej konfiguracji.
+  `assets/manifest.json` zapisuje datę i sześć grup zasobów. Stare
+  `desktop.tar.gz` usunięto. W nowym archiwum nie ma repozytorium dotfiles.
+- GNOME: 583 ustawienia wyglądu/skróty i 43 ustawienia systemowe. Manifest
+  obejmuje 10 obecnych rozszerzeń, w tym Tiling Shell 18.0; usunięto z eksportu
+  5 wpisów bez zainstalowanych plików. Bieżące układy i autotiling są zapisane.
+- `check-keybindings.py` oraz `--live`: 148 efektywnych skrótów, brak kolizji.
+  Test wykrywa równoważność Ctrl/Control/Primary i respektuje zastąpienie
+  domyślnych skrótów multimedialnych. Super + strzałki należą do Tiling Shell;
+  odpowiedniki GNOME są wyłączone, a stan przywracania rozszerzenia zachowany.
+- Ustawienia rozszerzeń i klawiszy są stosowane przed włączeniem rozszerzeń.
+- Vicinae zachowuje konfigurację, motyw, font i dwa skróty; zależność
+  `ttf-firacode-nerd` dopisano na podstawie ustawionego fontu.
+- Equicord ma zapisany i włączony System24. Test scalania JSON potwierdza
+  zachowanie konta, ustawień wtyczek i zagnieżdżonych opcji, utworzenie kopii,
+  idempotencję i zatrzymanie bez nadpisania przy błędnym JSON.
+- Steam: GNOME Mocha Pink to lokalny arkusz 3801 B. `check-steam-theme.py`
+  potwierdził brak skryptów/importów/rozmycia oraz obecność 9 klas układu
+  w plikach zainstalowanego klienta. Makietę wyrenderowano i obejrzano
+  w headless Floorp. To nie jest zrzut klienta ani benchmark płynności.
+- Motyw Steama zastosowano po potwierdzeniu zamknięcia klienta, z kopią
+  poprzedniej konfiguracji Millennium. Pozostałe ustawienia zostały zachowane.
+  Przy odtwarzaniu świeżej instalacji powstają standardowe linki bootstrapu
+  do bibliotek z pakietu AUR, bez kopiowania instalacji Steama do repo.
+- Dziesięć testów jednostkowych: OK. Sprawdzone również przenośność,
+  ochrona przed wyjściem archiwum/symlinków poza katalog i rozdział zakresów.
+- Pełne odtworzenie wyglądu i osobne odtworzenie systemowych plików użytkownika
+  do pustych katalogów: odpowiednio 47 083 i 63 pliki. Ponowne uruchomienia: 0 zmian.
+- Składnia Pythona, `verify.py` i kontrola diff: OK.
 
-- Główne listy ograniczono do 37 pakietów repo i 8 pakietów AUR, powiązanych
-  z zapisaną konfiguracją. Weryfikacja `pacman -T` potwierdziła ich obecność;
-  wszystkie nazwy z listy repo są dostępne w skonfigurowanych repozytoriach.
-- Sprawdzono właścicieli wtyczek integracji Qt z GTK3: odpowiednio
-  `qt5-base` i `qt6-base`. Dodano `qt5ct` i `qt6ct`, których pliki są zapisane.
-- Presety EasyEffects korzystają z efektów Calf, LSP i DeepFilterNet,
-  dlatego te dodatki są częścią przepisu. Rozszerzenia GNOME importują
-  GWeather, dostarczane przez `libgweather-4`.
-- Usunięto pełne inwentarze pakietów i wersji oraz wykazy aplikacji Flatpak
-  i starych repozytoriów. `capture.py` nie generuje ich i nie modyfikuje
-  ręcznie utrzymywanych list zależności.
-- `--all` obejmuje pulpit i Micro roota; test potwierdza brak wywołań etapu
-  systemowego i zmiany repozytoriów. Sześć zależności zapory, sieci i schedulera
-  znajduje się w osobnej liście `system.txt`, używanej tylko z `--system`.
-- Siedem testów jednostkowych: OK. Test instalowania pakietów potwierdza
-  pomijanie pakietów systemowych domyślnie i dołączanie ich wyłącznie na żądanie.
-- Sprawdzono plany odtwarzania, składnię Pythona, sumy kontrolne i diff.
-  Przy tej korekcie przepisu nie instalowano ani nie usuwano pakietów na hoście.
-
-## Wykonana migracja libcanberra i kontrole plików
-
-- Migracja wykonana na działającym systemie: `libcanberra` i
-  `libcanberra-gtk2-compat` zastąpione w jednej transakcji pacmana przez
-  `libcanberra-gtk2 1:0.30+r2+gc0620e4-6` z AUR. Bez wymuszania zależności
-  i nadpisywania plików. Recepta AUR: commit
-  `361aa1014fc822f051afdcb9657c9af807aeb540`.
-- `pacman -T libcanberra libcanberra.so=0-64 libcanberra-gtk.so=0-64
-  libcanberra-gtk3.so=0-64`: brak niespełnionych zależności.
-- `pacman -Dk`: `No database errors have been found!`. Stary, niepakietowy
-  plik `CACHY_UPDATE_NOTICE` przeniesiono z katalogu bazy do
-  `/var/backups/dotfiles/CACHY_UPDATE_NOTICE-20261105`.
-- `pacman -Qkk libcanberra-gtk2`: 73 pliki, 0 zmienionych.
-- `ldd -r`: 10 bibliotek, backendów i modułów; brak brakujących bibliotek
-  oraz nierozwiązanych symboli.
-- `python scripts/check-gtk2.py`: moduły GTK2 i GTK3 załadowane, oba konteksty
-  audio zwróciły `0`. Bez odtwarzania dźwięku.
-- Kitty, Fish, Fastfetch, Micro, EasyEffects i ScopeBuddy są zainstalowane;
-  listy odtwarzania zawierają wszystkie sześć programów.
-- Micro użytkownika i roota: motyw `simple`, `syntax: true`. Próba w PTY
-  potwierdziła start i zamknięcie edytora, kolory składni oraz domyślne tło
-  terminala. Przezroczystość kompozytora zależy od ustawień Kitty.
-- ScopeBuddy GUI uruchomił się z izolowanym katalogiem konfiguracji i
-  platformą Qt `offscreen`. Kopia zawiera kod, zasoby, licencję i profile
-  ScopeBuddy, do których odwołuje się zachowany launcher.
-- Pełne odtworzenie do pustego katalogu: 47 140 zmienionych plików;
-  ponowne odtworzenie: 0 zmian. Sprawdzono też payload GUI i symlink AppID.
-- Pięć testów jednostkowych zakończonych powodzeniem, w tym zachowanie
-  innych ustawień Micro roota, kopia i idempotencja oraz ochrona plików
-  przed zastąpieniem przy błędnym JSON.
-- `verify.py`, sprawdzenie składni skryptów i `git diff --check`: OK.
-- Po weryfikacji usunięto lokalną receptę, źródłowe archiwum i artefakty
-  compat. Odinstalowano cztery pakiety doinstalowane wyłącznie do budowy:
-  `gtk-doc`, `docbook-xml`, `docbook-xsl`, `glib2-docs`.
-
-Nie przeprowadzano pełnej instalacji pakietów na świeżej maszynie.
-
-## Wcześniejsze kontrole — 2026-10-30
-
-- GTK2: prawdziwy moduł został załadowany do procesu GTK2, a
-  `ca_context_open()` zwróciło 0. Nie odtwarzano dźwięku. Brak komunikatu
-  `Failed to load module` i brak nierozwiązanych symboli.
-- Integralność paczek: systemowy libcanberra — 64 pliki, 0 zmienionych;
-  libcanberra-gtk2-compat — 10 plików, 0 zmienionych.
-- Pełne odtworzenie plików do pustego katalogu innego użytkownika:
-  ponad 47 tys. plików. Zweryfikowano motywy, kursor, symlinki, PipeWire,
-  presety oraz podmianę ścieżki katalogu domowego i daty instalacji Fastfetch.
-- Drugie odtworzenie tego samego zestawu: 0 zmienionych plików.
-- 623 ustawienia GNOME sprawdzono rzeczywistym `gsettings set` na backendzie
-  pamięciowym — bez zmieniania ustawień działającej sesji; 0 błędów.
-- Cztery testy: przenośność i kopie, idempotencja, ochrona przed wyjściem
-  archiwum/symlinków poza katalog docelowy, stabilne pierwszeństwo repozytoriów.
-- Sprawdzono składnię skryptów i wzorce sekretów oraz sumy SHA-256 plików kopii.
-
-Nie przeprowadzano formatu ani pełnej instalacji pakietów na świeżej maszynie.
-Etap uprzywilejowany wymaga lokalnej sesji CachyOS GNOME i jest oddzielony
-od sprawdzonego odtwarzania plików. Jego funkcję układania repozytoriów
-sprawdzono testem; pozostałe operacje są jawne w scripts/system.py.
+Wcześniejsza migracja libcanberra z tego samego dnia pozostaje zweryfikowana:
+73 pliki paczki `libcanberra-gtk2`, 0 zmienionych; komplet SONAME, brak błędów
+bazy pacmana; GTK2 i GTK3 ładują moduły, oba konteksty audio zwracają 0.
+Nie uruchamiano ponownie ustawień zapory ani schedulera podczas tej korekty.

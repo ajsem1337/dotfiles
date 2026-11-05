@@ -18,11 +18,12 @@ def load(name):
 restore = load('restore')
 system = load('system')
 root_micro = load('configure-root-micro')
+keybindings = load('check-keybindings')
 
 class RestoreTests(unittest.TestCase):
     def test_default_package_restore_excludes_optional_system_packages(self):
-        recipes = {'repo.txt': ['kitty'], 'aur.txt': ['libcanberra-gtk2'],
-                   'system.txt': ['nftables']}
+        recipes = {'repo.txt': ['kitty'], 'aur.txt': ['millennium'],
+                   'system.txt': ['nftables'], 'system-aur.txt': ['libcanberra-gtk2']}
         for include_system in (False, True):
             with self.subTest(include_system=include_system), \
                  patch.object(restore, 'lines', side_effect=recipes.__getitem__), \
@@ -34,8 +35,67 @@ class RestoreTests(unittest.TestCase):
                 self.assertIn('kitty', repo_command)
                 self.assertEqual('nftables' in repo_command, include_system)
                 self.assertFalse(any('--prepare-repos' in cmd for cmd in commands))
-                self.assertTrue(any('libcanberra-gtk2' in cmd and cmd[0] == 'paru'
-                                    for cmd in commands))
+                self.assertTrue(any('millennium' in cmd and cmd[0] == 'paru' for cmd in commands))
+                self.assertEqual(any('libcanberra-gtk2' in cmd for cmd in commands), include_system)
+        with patch.object(restore, 'lines', side_effect=recipes.__getitem__), \
+             patch.object(restore.shutil, 'which', return_value='/usr/bin/paru'), \
+             patch.object(restore, 'run') as run:
+            restore.install_packages(include_system=True, include_appearance=False)
+            commands = [call.args[0] for call in run.call_args_list]
+            self.assertFalse(any('kitty' in cmd or 'millennium' in cmd for cmd in commands))
+            self.assertTrue(any('nftables' in cmd for cmd in commands))
+
+    def test_shortcut_aliases_and_media_override(self):
+        def item(schema, key, value):
+            return {'schema': schema, 'key': key, 'value': value, 'schema_dir': None}
+        records = [item('org.gnome.desktop.wm.keybindings', 'test-a', "['<Primary><Alt>t']"),
+                   item('org.gnome.shell.keybindings', 'test-b', "['<Control><Alt>t']")]
+        self.assertEqual(len(keybindings.conflicts(records)[0]), 1)
+        records = [item(keybindings.MEDIA, 'volume-up', "['<Control>KP_Add']"),
+                   item(keybindings.MEDIA, 'volume-up-static', "['XF86AudioRaiseVolume']"),
+                   item('org.gnome.shell.keybindings', 'other', "['XF86AudioRaiseVolume']")]
+        self.assertEqual(keybindings.conflicts(records)[0], {})
+
+    def test_appearance_merge_preserves_account_and_plugin_settings(self):
+        with tempfile.TemporaryDirectory() as td:
+            base = Path(td)
+            source = self.fixture(base)
+            patches = source / 'themes/apps'
+            patches.mkdir(parents=True)
+            (patches / 'client.json').write_text(json.dumps({'path': '.config/client.json',
+                'merge': {'themes': {'activeTheme': 'new'}, 'enabledThemes': ['system24']}}))
+            home = base / 'home'
+            settings = home / '.config/client.json'
+            settings.parent.mkdir(parents=True)
+            original = {'themes': {'activeTheme': 'old', 'other': 1}, 'plugins': {'keep': True}, 'account': 'untouched'}
+            settings.write_text(json.dumps(original))
+            backup, _ = restore.restore_home(home, source)
+            result = json.loads(settings.read_text())
+            self.assertEqual(result['plugins'], original['plugins'])
+            self.assertEqual(result['account'], original['account'])
+            self.assertEqual(result['themes'], {'activeTheme': 'new', 'other': 1})
+            self.assertEqual(json.loads((backup / '.config/client.json').read_text()), original)
+            self.assertEqual(restore.restore_home(home, source)[1], 0)
+            settings.write_text('broken json')
+            with self.assertRaises(json.JSONDecodeError):
+                restore.restore_home(home, source)
+            self.assertEqual(settings.read_text(), 'broken json')
+            (patches / 'client.json').write_text(json.dumps({'path': '../escape.json', 'merge': {'x': 1}}))
+            with self.assertRaises(ValueError):
+                restore.restore_home(home, source)
+            self.assertFalse((base / 'escape.json').exists())
+
+    def test_system_payload_needs_no_appearance_archive(self):
+        with tempfile.TemporaryDirectory() as td:
+            base = Path(td)
+            source = base / 'system'
+            payload = source / 'home/.config/easyeffectsrc'
+            payload.parent.mkdir(parents=True)
+            payload.write_text('[UiSettings]\nColorScheme=CatppuccinMochaPink\n')
+            home = base / 'home'
+            self.assertEqual(restore.restore_home(home, source)[1], 1)
+            self.assertEqual(restore.restore_home(home, source)[1], 0)
+            self.assertFalse((home / '.themes').exists())
 
     def test_all_restores_desktop_and_root_micro_without_system_changes(self):
         with patch.object(restore.sys, 'argv', ['restore.py', '--all']), \
@@ -44,7 +104,7 @@ class RestoreTests(unittest.TestCase):
              patch.object(restore, 'restore_gnome') as gnome, \
              patch.object(restore, 'run') as run:
             restore.main()
-        packages.assert_called_once_with(include_system=False)
+        packages.assert_called_once_with(include_system=False, include_appearance=True)
         home.assert_called_once()
         gnome.assert_called_once()
         commands = [list(map(str, call.args[0])) for call in run.call_args_list]
@@ -78,7 +138,7 @@ class RestoreTests(unittest.TestCase):
         (source / 'home/.config/example.conf').write_text('home=@HOME@\n')
         (source / 'home/.config/binary').write_bytes(b'\x00\xff@HOME@')
         (source / 'assets').mkdir()
-        with tarfile.open(source / 'assets/desktop.tar.gz', 'w:gz') as tar:
+        with tarfile.open(source / 'assets/appearance.tar.gz', 'w:gz') as tar:
             data = b'/* palette */\n'
             item = tarfile.TarInfo('.themes/Test/gtk.css')
             item.size = len(data)
@@ -108,7 +168,7 @@ class RestoreTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             base = Path(td)
             source = self.fixture(base)
-            with tarfile.open(source / 'assets/desktop.tar.gz', 'w:gz') as tar:
+            with tarfile.open(source / 'assets/appearance.tar.gz', 'w:gz') as tar:
                 item = tarfile.TarInfo('../escape')
                 item.size = 1
                 tar.addfile(item, io.BytesIO(b'x'))

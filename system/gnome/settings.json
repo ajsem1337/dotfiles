@@ -1,0 +1,260 @@
+[
+  {
+    "schema": "org.gnome.desktop.sound",
+    "key": "theme-name",
+    "value": "'freedesktop'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.sound",
+    "key": "event-sounds",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.sound",
+    "key": "input-feedback-sounds",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.sound",
+    "key": "allow-volume-above-100-percent",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "custom-accel-config",
+    "value": "{'pointer-step': <1.0>, 'pointer-speeds': <[0.0, 1.0]>}",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "double-click",
+    "value": "400",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "accel-profile",
+    "value": "'flat'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "drag-threshold",
+    "value": "8",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "scroll-wheel-emulation-button-lock",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "speed",
+    "value": "-0.50420168067226889",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "natural-scroll",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "middle-click-emulation",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "left-handed",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.mouse",
+    "key": "scroll-wheel-emulation-button",
+    "value": "0",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "natural-scroll",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "left-handed",
+    "value": "'mouse'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "scroll-speed",
+    "value": "1.0",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "click-method",
+    "value": "'fingers'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "speed",
+    "value": "0.0",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "middle-click-emulation",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "two-finger-scrolling-enabled",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "tap-button-map",
+    "value": "'default'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "disable-while-typing",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "edge-scrolling-enabled",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "tap-and-drag",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "custom-accel-config",
+    "value": "{'pointer-step': <1.0>, 'pointer-speeds': <[0.0, 1.0]>}",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "send-events",
+    "value": "'enabled'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "tap-and-drag-lock",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "disable-while-typing-timeout",
+    "value": "uint32 500",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "tap-to-click",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.touchpad",
+    "key": "accel-profile",
+    "value": "'default'",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.keyboard",
+    "key": "delay",
+    "value": "uint32 500",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.keyboard",
+    "key": "remember-numlock-state",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.keyboard",
+    "key": "numlock-state",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.keyboard",
+    "key": "repeat",
+    "value": "true",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.peripherals.keyboard",
+    "key": "repeat-interval",
+    "value": "uint32 30",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "xkb-options",
+    "value": "@as []",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "mru-sources",
+    "value": "@a(ss) []",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "show-all-sources",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "current",
+    "value": "uint32 0",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "per-window",
+    "value": "false",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "sources",
+    "value": "[('xkb', 'pl')]",
+    "schema_dir": null
+  },
+  {
+    "schema": "org.gnome.desktop.input-sources",
+    "key": "xkb-model",
+    "value": "'pc105+inet'",
+    "schema_dir": null
+  }
+]
