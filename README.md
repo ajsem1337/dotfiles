@@ -9,8 +9,10 @@ This branch is a small reference, not a supported desktop installer. It keeps:
 - my GTK4/libadwaita color overrides;
 - my Equicord System24 adjustments (based on the upstream theme imported in the CSS).
 
-The old desktop used Catppuccin Mocha Pink, a Catppuccin GTK/GNOME theme with
-local tweaks, Tela Pink icons, Kitty, Fish and Vicinae. Making all applications
+The old desktop used [Material GNOME](https://github.com/SakibShahariar/material-gnome-theme)
+as its GNOME theme base, alongside Catppuccin GTK and our local tweaks in
+Catppuccin Mocha Pink, Tela Pink icons, Kitty, Fish and Vicinae. System24 was
+only the separate Equicord/Discord theme, not the GNOME theme. Making all applications
 match required many toolkit-specific overrides. Noctalia now provides the
 official/community template system I need, so I do not maintain that stack.
 
@@ -21,7 +23,7 @@ history, not recommended installation instructions.
 
 Useful upstreams: [Catppuccin](https://github.com/catppuccin/catppuccin),
 [Catppuccin GTK](https://github.com/catppuccin/gtk),
-[System24](https://github.com/refact0r/system24).
+[Material GNOME](https://github.com/SakibShahariar/material-gnome-theme).
 
 If I return to GNOME, I will start with maintained upstream tools rather than
 revive this collection of workarounds.
