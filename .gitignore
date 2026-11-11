@@ -1,3 +1,17 @@
 __pycache__/
 *.pyc
 .restore-backups/
+
+# Runtime/user state and generated Noctalia output are not source files.
+.DS_Store
+home/.local/state/
+home/.local/opt/
+home/.config/fish/fish_variables
+home/.config/kitty/themes/
+home/.config/fastfetch/themes/
+home/.config/btop/themes/
+home/.config/bat/themes/
+home/.config/fzf/themes/
+home/.config/micro/backups/
+home/.config/micro/buffers/
+target/

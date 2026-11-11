@@ -1,4 +1,6 @@
 {
-    "colorscheme": "simple",
-    "syntax": true
+  "clipboard": "terminal",
+  "colorscheme": "simple",
+  "softwrap": true,
+  "wordwrap": true
 }

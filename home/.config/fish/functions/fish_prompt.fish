@@ -1,32 +1,33 @@
 function fish_prompt
     set -l last_status $status
 
-    set_color -o f38ba8
+    # Nazwane kolory ANSI pochodzą z palety Kitty generowanej przez Noctalię.
+    set_color -o red
     echo -n "♥ "
     set_color normal
 
-    set_color -o f5c2e7
+    set_color -o magenta
     echo -n "$USER "
     set_color normal
 
     if set -q SSH_CONNECTION
-        set_color bac2de
+        set_color white
         echo -n "@"(hostname -s)" "
         set_color normal
     end
 
-    set_color -o 89b4fa
+    set_color -o blue
     echo -n (prompt_pwd)" "
     set_color normal
 
     set -l git_info (__fish_git_prompt "%s")
     if test -n "$git_info"
-        set_color -o fab387
+        set_color -o yellow
         echo -n " $git_info "
         set_color normal
     end
 
-    set_color b4befe
+    set_color cyan
     echo -n (date "+%H:%M")" "
     set_color normal
 
@@ -43,17 +44,17 @@ function fish_prompt
                 set -l seconds (math -s0 "($duration_ms%60000)/1000")
                 set duration_str "$minutes""m""$seconds""s"
             end
-            set_color fab387
+            set_color yellow
             echo -n "$duration_str "
             set_color normal
         end
     end
 
     if test $last_status -eq 0
-        set_color -o a6e3a1
+        set_color -o green
         echo -n "➜ "
     else
-        set_color -o f38ba8
+        set_color -o red
         echo -n "✗ "
     end
 

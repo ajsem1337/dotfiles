@@ -5,8 +5,8 @@ if status is-interactive
     # Lokalne programy użytkownika; fish_add_path usuwa duplikaty.
     fish_add_path -g $HOME/.local/bin
 
-    # Kitty SSH zachowuje integrację terminala na zdalnej maszynie.
-    alias kssh="kitty +kitten ssh"
+    # SSH Kitty dostarcza terminfo na serwer; nie podmieniamy zwykłego ssh.
+    alias kssh="kitten ssh"
 
     # Edytor terminalowy. Nie podmieniamy nano na program z inną składnią.
     if type -q micro
@@ -14,27 +14,15 @@ if status is-interactive
         set -gx VISUAL micro
     end
 
-    # Czytelne listowanie z ikonami. Oryginalne ls nadal: command ls.
-    if type -q eza
-        alias ls="eza --icons --group-directories-first"
-        alias ll="eza -l --icons --group-directories-first"
-        alias la="eza -la --icons --group-directories-first"
-        alias tree="eza --tree --level=2 --icons --group-directories-first"
-    end
-
     # Czytelny podgląd plików. Surowe cat nadal: command cat.
     if type -q bat
         alias cat="bat --paging=never"
     end
 
-    # Szybsze cd z pamięcią często używanych katalogów.
-    if type -q zoxide
-        zoxide init fish --cmd cd | source
-    end
-
-    # Przeszukiwalna historia poleceń.
-    if type -q atuin
-        atuin init fish | source
+    # Czytelne listowanie. Oryginalne ls nadal dostępne jako: command ls.
+    if type -q eza
+        alias ls="eza --icons=auto --group-directories-first"
+        alias ll="eza --long --all --icons=auto --group-directories-first"
     end
 
     # Ustawienia własnego prompta.
@@ -51,7 +39,7 @@ if status is-interactive; and status is-login; and not set -q SSH_CONNECTION; an
 end
 
 # pnpm
-set -gx PNPM_HOME '@HOME@/.local/share/pnpm'
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- "$PNPM_HOME/bin" $PATH
   set -gx PATH "$PNPM_HOME/bin" $PATH
 end

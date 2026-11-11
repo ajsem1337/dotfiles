@@ -1,0 +1,4 @@
+# Merge into ~/.config/noctalia/config.toml; do not replace unrelated settings.
+[theme.templates.user.kitty-details]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/kitty-details.conf"
+output_path = "$XDG_CONFIG_HOME/kitty/themes/noctalia-details.conf"

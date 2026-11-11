@@ -1,0 +1,106 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 3f18f41..6ff278f 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -15,7 +15,7 @@ path = "hook/traur-hook.rs"
+ 
+ [dependencies]
+ clap = { version = "4", features = ["derive"] }
+-reqwest = { version = "0.12", features = ["blocking", "json"] }
++reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls-native-roots"] }
+ serde = { version = "1", features = ["derive"] }
+ serde_json = "1"
+ toml = "0.8"
+diff --git a/src/main.rs b/src/main.rs
+index 80c3aa1..29299ce 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -167,13 +167,27 @@ fn cmd_scan(
+                     .to_string(),
+             )
+         };
+-        let loaded = match shared::local_scan::load_dir(&name, &root) {
++        let mut loaded = match shared::local_scan::load_dir(&name, &root) {
+             Ok(l) => l,
+             Err(e) => {
+                 eprintln!("Error reading {target}: {e}");
+                 return 1;
+             }
+         };
++        // Local integration: JSON must not hide skipped/truncated input.
++        if loaded.capped {
++            loaded.context.incomplete.push("local source analysis limit reached".into());
++        }
++        for (name, reason) in &loaded.skipped_sources {
++            loaded.context.incomplete.push(format!("{name} not analysed: {reason}"));
++        }
++        if let Some(pkgbuild) = loaded.context.pkgbuild_content.as_deref() {
++            if let Some(install) = shared::local_scan::declared_install_path(pkgbuild) {
++                if loaded.context.install_script_content.is_none() {
++                    loaded.context.incomplete.push(format!("install script {install} could not be read"));
++                }
++            }
++        }
+         let result = coordinator::run_analysis(&loaded.context);
+ 
+         // Anything not analysed is reported, so nobody reads a partial scan as
+diff --git a/src/shared/aur_git.rs b/src/shared/aur_git.rs
+index 9297807..8d5de68 100644
+--- a/src/shared/aur_git.rs
++++ b/src/shared/aur_git.rs
+@@ -20,12 +20,15 @@ pub fn ensure_repo(package_base: &str, cache_dir: &str) -> Result<PathBuf, Strin
+     let repo_path = PathBuf::from(cache_dir).join(package_base);
+ 
+     if repo_path.join(".git").exists() {
+-        // Pull latest — if it fails, use the cached version rather than erroring out
+-        let _ = run_with_timeout(
++        // Local protection policy: a failed refresh is not a fresh scan.
++        let output = run_with_timeout(
+             Command::new("git")
+                 .args(["pull", "--ff-only"])
+                 .current_dir(&repo_path),
+-        );
++        )?;
++        if !output.status.success() {
++            return Err(format!("git refresh failed: {}", String::from_utf8_lossy(&output.stderr)));
++        }
+     } else {
+         // Shallow clone
+         let url = format!("{AUR_GIT_BASE}/{package_base}.git");
+diff --git a/src/shared/local_scan.rs b/src/shared/local_scan.rs
+index dc82581..94c6e17 100644
+--- a/src/shared/local_scan.rs
++++ b/src/shared/local_scan.rs
+@@ -214,7 +214,11 @@ fn read_local_sources(
+         let path_part = entry.split("::").next().unwrap_or(&entry).trim();
+         let path_part = path_part.trim_matches(|c| c == '\'' || c == '"');
+ 
+-        let is_remote = path_part.contains("://")
++        // Renamed downloads are `filename::https://...`; classify the URL,
++        // not just the local filename. A cached downloaded binary is not a
++        // committed text source and must not become a spurious partial scan.
++        let source_part = entry.split_once("::").map(|(_, source)| source).unwrap_or(&entry);
++        let is_remote = source_part.contains("://")
+             || path_part.contains('$')
+             || matches!(
+                 path_part.split_once('+').map(|(scheme, _)| scheme),
+@@ -355,6 +359,19 @@ mod tests {
+ 
+     const BASE: &str = "pkgname=split-test\npkgver=1\npkgrel=1\n";
+ 
++    #[test]
++    fn cached_renamed_download_is_not_a_committed_local_source() {
++        let dir = temp_pkg(
++            "renamed-remote",
++            &[("PKGBUILD", &format!("{BASE}source=('app.bin::https://example.org/app.bin')\n"))],
++        );
++        std::fs::write(dir.join("app.bin"), vec![0u8; 300 * 1024]).unwrap();
++        let loaded = load_dir("split-test", &dir).unwrap();
++        assert!(loaded.context.local_sources.is_empty());
++        assert!(loaded.skipped_sources.is_empty());
++        assert!(!loaded.capped);
++    }
++
+     #[test]
+     fn literal_install_directive_is_read() {
+         let dir = temp_pkg(

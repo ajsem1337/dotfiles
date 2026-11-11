@@ -1,0 +1,3 @@
+#!/bin/sh
+# Scan before makepkg can source any PKGBUILD, including metadata-only queries.
+exec /usr/bin/python3 -I "$HOME/.local/lib/aur-security/guard.py" "$@"

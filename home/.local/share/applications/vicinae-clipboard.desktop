@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Vicinae Clipboard
-Exec=systemd-run --user --quiet --collect --slice=app.slice vicinae "vicinae://launch/clipboard/history?toggle=true"
-Type=Application
-NoDisplay=true
-Terminal=false
