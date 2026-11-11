@@ -1,7 +1,7 @@
 function fish_prompt
     set -l last_status $status
 
-    # Nazwane kolory ANSI pochodzą z palety Kitty generowanej przez Noctalię.
+    # ANSI colors follow the terminal palette.
     set_color -o red
     echo -n "♥ "
     set_color normal

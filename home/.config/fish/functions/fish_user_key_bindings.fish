@@ -22,7 +22,7 @@ end
 
 function fish_user_key_bindings
     if command -q fzf
-        # Tylko historia: nie włączamy dodatkowych skrótów Ctrl+T ani Alt+C.
+        # History only; leave Ctrl+T and Alt+C unbound.
         set -lx FZF_CTRL_T_COMMAND ""
         set -lx FZF_ALT_C_COMMAND ""
         fzf_key_bindings
