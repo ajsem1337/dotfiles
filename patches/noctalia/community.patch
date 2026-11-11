@@ -1,0 +1,47 @@
+--- a/fzf/fzf.fish
++++ b/fzf/fzf.fish
+@@ -15,9 +15,11 @@
+ --color=border:{{colors.terminal_selection_bg.default.hex}}
+ --color=label:{{colors.on_surface.default.hex}}"
+ 
+-if set -q FZF_DEFAULT_OPTS[1]; and test -n "$FZF_DEFAULT_OPTS"
+-    set -Ux FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS
+-$fzf_theme_opts"
+-else
+-    set -Ux FZF_DEFAULT_OPTS "$fzf_theme_opts"
++# Keep unrelated options, but replace our previous colors on reload or in a child shell.
++# Global/exported values avoid accumulating copies in Fish's universal variables.
++set -l fzf_base_opts "$FZF_DEFAULT_OPTS"
++if set -q NOCTALIA_FZF_THEME_OPTS[1]; and test -n "$NOCTALIA_FZF_THEME_OPTS"
++    set fzf_base_opts (string replace -- "$NOCTALIA_FZF_THEME_OPTS" "" "$fzf_base_opts" | string collect)
+ end
++set -gx NOCTALIA_FZF_THEME_OPTS "$fzf_theme_opts"
++set -gx FZF_DEFAULT_OPTS "$(string trim -- "$fzf_base_opts") $fzf_theme_opts"
+--- a/papirus-icons/apply.sh
++++ b/papirus-icons/apply.sh
+@@ -82,9 +82,11 @@
+         ds = ts - cs
+         dv = tv - cv
+ 
+-        # scale hue term by saturation product so greys/low-sat colors
+-        # do not get distorted by an undefined/meaningless hue
+-        d = WH * (ts*cs) * dh*dh + WS * ds*ds + WV * dv*dv
++        d = WS * ds*ds + WV * dv*dv
++        if (ts >= 0.15) {
++          d += WH * dh*dh
++          if (cs < 0.15) d += 1
++        }
+ 
+         if (min == "" || d < min) {
+           min = d
+--- a/vscode/template.toml
++++ b/vscode/template.toml
+@@ -5,7 +5,7 @@
+ [templates.vscode_code]
+ input_path = "vscode.json"
+ output_path = "~/.vscode/extensions/noctalia.noctaliatheme-0.0.5/themes/NoctaliaTheme-color-theme.json"
+-requires_path = "~/.vscode"
++requires_path = "~/.vscode/extensions/noctalia.noctaliatheme-0.0.5/package.json"
+ 
+ [templates.vscode_codium]
+ input_path = "vscode.json"

@@ -35,6 +35,8 @@ additions are included with the configs below.
 | `home/.config/fish/` | Prompt, aliases and key bindings. |
 | `home/.config/{micro,fastfetch,btop,bat}/` | Small terminal-tool preferences and the Fastfetch layout/image. |
 | `home/.config/noctalia/templates/kitty-details.conf` | Extra Kitty color bindings, rendered by Noctalia. |
+| `umbriel-gtk-buttons.toml` | Our GTK-style titlebar buttons; other compositor colors follow Noctalia. |
+| `patches/noctalia/` | Small, reproducible fixes to upstream integrations. |
 | `home/.local/bin/`, `home/.local/lib/aur-security/`, `aur/traur/` | My Traur/makepkg integration, tests and reproducible scanner patch. |
 | `wallpapers/` | The wallpaper I use. |
 
@@ -53,7 +55,10 @@ want; this is not an unattended desktop installer.
    those configs. Generated color files are not included here.
 3. Merge [`noctalia-kitty.toml`](noctalia-kitty.toml) into your existing Noctalia
    config to enable the extra Kitty template, then apply it.
-4. Pick the wallpaper separately and add System Menu from its repository.
+4. Merge [`umbriel-gtk-buttons.toml`](umbriel-gtk-buttons.toml) into your primary
+   Umbriel config. Only the button appearance overrides the generated theme.
+5. Apply the [local integration fixes](patches/noctalia/README.md) after the first
+   template download. Pick the wallpaper separately and add System Menu from its repository.
 
 The Traur integration is optional: read [its instructions](docs/aur-security.md)
 before installing the `.local/` files. It is a heuristic check, **not a sandbox

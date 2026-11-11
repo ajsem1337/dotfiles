@@ -1,0 +1,21 @@
+# Merge into the primary Umbriel config so these override generated colors.
+[appearance.title_bar]
+mode = "negotiated"
+height = 48
+button_position = "right"
+buttons = ["minimize", "maximize", "close"]
+button_corner_radius = 100
+button_background = true
+button_glyph = "always"
+
+# GTK-style neutral buttons; all other colors come from Noctalia.
+[colors.title_bar]
+minimize = "#CDD6F41A"
+maximize = "#CDD6F41A"
+close = "#CDD6F41A"
+minimize_glyph = "#CDD6F4"
+maximize_glyph = "#CDD6F4"
+close_glyph = "#CDD6F4"
+minimize_glyph_hover = "#CDD6F4"
+maximize_glyph_hover = "#CDD6F4"
+close_glyph_hover = "#CDD6F4"

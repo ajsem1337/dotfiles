@@ -16,7 +16,12 @@
 		{ "type": "initsystem", "key": "├  Init" },
 		{ "type": "shell", "key": "├  Shell" },
 		{ "type": "packages", "key": "├ 󰏖 Packages" },
-		{ "type": "uptime", "key": "└  Uptime" },
+		{ "type": "uptime", "key": "├  Uptime" },
+		{
+			"type": "command",
+			"key": "└  OS Age",
+			"text": "b=1787423429; n=$(date +%s); d=$(( (n-b)/86400 )); echo ${d} days"
+		},
 		"break",
 		{ "type": "wm", "key": "┌  WM" },
 		{ "type": "theme", "key": "├ 󰉼 Theme" },
