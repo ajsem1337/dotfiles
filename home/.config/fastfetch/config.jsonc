@@ -8,24 +8,24 @@
 	},
 	"display": {
 		"separator": "    ",
-		"key": { "type": "string", "paddingLeft": 0 }
+		"key": { "type": "string", "paddingLeft": 0, "width": 18 }
 	},
 	"modules": [
-		{ "type": "kernel", "key": "┌  Kernel" },
-		{ "type": "bootmgr", "key": "├  BootMgr", "format": "{1}" },
-		{ "type": "initsystem", "key": "├  Init" },
-		{ "type": "shell", "key": "├  Shell" },
+		{ "type": "kernel", "key": "┌  Kernel  " },
+		{ "type": "bootmgr", "key": "├  BootMgr ", "format": "{1}" },
+		{ "type": "initsystem", "key": "├  Init    " },
+		{ "type": "shell", "key": "├  Shell   " },
 		{ "type": "packages", "key": "├ 󰏖 Packages" },
-		{ "type": "uptime", "key": "├  Uptime" },
+		{ "type": "uptime", "key": "├  Uptime  " },
 		{
 			"type": "command",
-			"key": "└  OS Age",
+			"key": "└  OS Age  ",
 			"text": "b=1787423429; n=$(date +%s); d=$(( (n-b)/86400 )); echo ${d} days"
 		},
 		"break",
-		{ "type": "wm", "key": "┌  WM" },
-		{ "type": "theme", "key": "├ 󰉼 Theme" },
-		{ "type": "icons", "key": "├ 󰀻 Icons" },
+		{ "type": "wm", "key": "┌  WM      " },
+		{ "type": "theme", "key": "├ 󰉼 Theme   " },
+		{ "type": "icons", "key": "├ 󰀻 Icons   " },
 		{ "type": "terminal", "key": "├  Terminal" },
 		{ "type": "terminalfont", "key": "└  TermFont", "format": "{2}" }
 	]
