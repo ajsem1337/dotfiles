@@ -14,4 +14,5 @@ home/.config/bat/themes/
 home/.config/fzf/themes/
 home/.config/micro/backups/
 home/.config/micro/buffers/
+home/.config/micro/colorschemes/noctalia.micro
 target/

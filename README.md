@@ -47,16 +47,19 @@ not by copying their generated output from this repo:
 | VS Code | [vscode](https://github.com/noctalia-dev/community-templates/tree/main/vscode) |
 | Prism Launcher | [prismlauncher](https://github.com/noctalia-dev/community-templates/tree/main/prismlauncher) |
 | Steam / Millennium | [steam](https://github.com/noctalia-dev/community-templates/tree/main/steam) |
+| Micro | [micro](https://github.com/noctalia-dev/community-templates/tree/main/micro) |
 | Fastfetch colors | [fastfetch](https://github.com/noctalia-dev/community-templates/tree/main/fastfetch) |
 | Thunderbird | [thunderbird](https://github.com/noctalia-dev/community-templates/tree/main/thunderbird) |
 | Papirus folder colors | [papirus-icons](https://github.com/noctalia-dev/community-templates/tree/main/papirus-icons) |
 | bat | [bat](https://github.com/noctalia-dev/community-templates/tree/main/bat) |
 | fzf | [fzf](https://github.com/noctalia-dev/community-templates/tree/main/fzf) |
 
-Micro currently uses its built-in **simple** colorscheme and terminal colors.
-The [community Micro template](https://github.com/noctalia-dev/community-templates/tree/main/micro)
-is an alternative, not an enabled part of this snapshot. Floorp is also not
-automatically recolored by Noctalia in my setup.
+Micro uses the community **Noctalia** colorscheme, not a theme of my own. The
+template supplies syntax and UI colors while leaving the main editor background
+to the terminal. My settings only keep the small terminal/background and wrapping
+preferences; `softwrap` and `wordwrap` stay enabled. The template's hook selects
+`noctalia` without replacing those preferences. Floorp is not automatically
+recolored by Noctalia in my setup.
 
 ## What is actually mine here
 
@@ -65,7 +68,7 @@ automatically recolored by Noctalia in my setup.
 | `home/.config/kitty/kitty.conf` | Font, transparency, tabs, clipboard behavior and shortcuts. X11 rendering is intentional in this snapshot. |
 | `home/.config/noctalia/templates/kitty-details.conf` | Small template filling the tab/bell/mark colors not covered by the built-in Kitty template; no generated palette. |
 | `home/.config/fish/` | Heart prompt, Git/status/duration display, aliases, selection/copy bindings and an fzf-history shortcut. The fzf loader only sources Noctalia's output. |
-| `home/.config/micro/` | Editor and terminal-clipboard preferences; no vendored syntax or colorscheme packs. |
+| `home/.config/micro/` | Small wrapping/terminal preferences and selection of the upstream Noctalia theme; no custom theme or vendored syntax/colorscheme packs. |
 | `home/.config/fastfetch/` | Module layout and the image I use, without generated hex colors. Noctalia's community hook adds the colors after installation. |
 | `home/.config/btop/`, `home/.config/bat/` | Behavior and references to generated Noctalia themes. |
 | `home/.local/bin/{makepkg,traur}`, `home/.local/lib/aur-security/` | My pre-execution integration around the upstream Traur scanner, plus tests. |
@@ -93,7 +96,7 @@ existing files and review each configuration before copying it. `home/` mirrors
    `config.jsonc`. Its photo path uses the default `~/.config` location; adjust
    it if you use a custom config directory.
 3. Select the palette and official/community templates above in Noctalia.
-   In particular, generate the Kitty, btop, bat and fzf theme files before using
+   In particular, generate the Kitty, Micro, btop, bat and fzf theme files before using
    the corresponding configurations. Fastfetch's config is strict JSON so the
    community template's `jq` hook can update it; it deliberately has no saved
    machine-specific OS installation date.
