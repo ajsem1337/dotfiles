@@ -1,5 +1,7 @@
 # Umbriel + Noctalia dotfiles
 
+![Made with AI](https://raw.githubusercontent.com/ajsem1337/ajsem1337/main/assets/made-with-ai.svg)
+
 CachyOS · Wayland · [Umbriel](https://github.com/noctalia-dev/umbriel) ·
 [Noctalia](https://github.com/noctalia-dev/noctalia) · Kitty · Fish
 
@@ -78,3 +80,7 @@ git diff --check
 
 No runtime state, generated themes, reports or account data are captured.
 Upstream themes, templates and artwork retain their original authorship and rights.
+
+---
+
+<p align="center"><sub>Built by <a href="https://github.com/ajsem1337">ajsem</a> with AI assistance.</sub></p>
