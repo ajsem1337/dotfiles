@@ -1,0 +1,27 @@
+name: Config checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Fish
+        run: sudo apt-get update && sudo apt-get install --yes fish
+      - name: Validate Fish syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            fish --no-execute "$file"
+          done < <(find home/.config/fish -name '*.fish' -print0)
+      - name: Check whitespace
+        run: git show --format= --check HEAD

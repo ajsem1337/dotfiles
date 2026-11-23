@@ -3,7 +3,7 @@
 CachyOS · Wayland · [Umbriel](https://github.com/noctalia-dev/umbriel) ·
 [Noctalia](https://github.com/noctalia-dev/noctalia) · Kitty · Fish
 
-My terminal configs, a few local helpers and a wallpaper I like. Desktop and
+My terminal configs and a wallpaper I like. Desktop and
 application styling comes from Noctalia's
 [built-in](https://github.com/noctalia-dev/noctalia/tree/main/assets/templates)
 and [community templates](https://github.com/noctalia-dev/community-templates),
@@ -37,7 +37,6 @@ additions are included with the configs below.
 | `home/.config/noctalia/templates/kitty-details.conf` | Extra Kitty color bindings, rendered by Noctalia. |
 | `umbriel-gtk-buttons.toml` | Our GTK-style titlebar buttons; other compositor colors follow Noctalia. |
 | `patches/noctalia/` | Small, reproducible fixes to upstream integrations. |
-| `home/.local/bin/`, `home/.local/lib/aur-security/`, `aur/traur/` | My Traur/makepkg integration, tests and reproducible scanner patch. |
 | `wallpapers/` | The wallpaper I use. |
 
 My **[System Menu](https://github.com/ajsem1337/system-menu)** Noctalia plugin
@@ -60,9 +59,9 @@ want; this is not an unattended desktop installer.
 5. Apply the [local integration fixes](patches/noctalia/README.md) after the first
    template download. Pick the wallpaper separately and add System Menu from its repository.
 
-The Traur integration is optional: read [its instructions](docs/aur-security.md)
-before installing the `.local/` files. It is a heuristic check, **not a sandbox
-or a safety guarantee**.
+This repository is limited to appearance and desktop/terminal configuration.
+Package management and its optional Traur wrapper belong to
+[package-menu](https://github.com/ajsem1337/package-menu), not these dotfiles.
 
 ## Previous setup
 
@@ -73,7 +72,6 @@ the original snapshots remain in Git history, not as a maintained restore kit.
 ## Checks
 
 ```sh
-python3 -B -m unittest discover -s home/.local/lib/aur-security -p 'test_*.py' -v
 find home/.config/fish -name '*.fish' -exec fish --no-execute {} \;
 git diff --check
 ```

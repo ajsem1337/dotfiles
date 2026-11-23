@@ -1,3 +1,0 @@
-#!/bin/sh
-# Reviewed local build; the build gate invokes the binary directly with its own policy.
-exec "$HOME/.local/opt/traur-security/bin/traur" "$@"
